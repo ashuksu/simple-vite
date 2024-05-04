@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
-import PageTitle from "./components/PageTitle";
-import SidebarTitle from "./components/SidebarTitle";
+import Title from "./components/ui/Title";
 
 interface Track {
     id: string;
@@ -81,7 +80,7 @@ export default function App() {
             <div
                 className={`list w-max max-w-100 flex flex-col items-center justify-center 
                     bg-gray-200 rounded-lg p-6 text-gray-700 text-lg`}>
-                <PageTitle/>
+                <Title title='Page Title'/>
                 <button
                     className={`cursor-pointer flex items-center justify-center mb-2.5 px-5 py-2.5 rounded-lg 
                         bg-blue-200 text-center text-lg text-gray-700`}
@@ -115,7 +114,7 @@ export default function App() {
             </div>
             <div className="details w-1/2 flex flex-col items-start
                     bg-gray-500 rounded-lg p-6 text-gray-100 text-lg">
-                <SidebarTitle/>
+                <Title title='Sidebar Title'/>
                 <ul className='text-sm text-left'>
                     {!selectedTrack && !selectedTrackId && <li className='text-lg font-bold'>NO selected</li>}
                     {!selectedTrack && selectedTrackId && <li className='text-sm'>Loading...</li>}
