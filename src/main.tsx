@@ -1,7 +1,7 @@
-import { createRoot } from 'react-dom/client'
+import {createRoot} from 'react-dom/client'
+import MainPage from "./components/pages/MainPage.tsx";
 import './index.css'
-import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
-    <App />
-)
+    <MainPage/>
+);
