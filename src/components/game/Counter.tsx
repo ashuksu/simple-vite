@@ -9,10 +9,10 @@ export function Counter(props: Props) {
     const endCount = 5
 
     const handleClick = () => {
-        let curentCount = props.count + 1;
-        props.setCount(curentCount)
+        const currentCount = props.count + 1;
+        props.setCount(currentCount)
 
-        if (curentCount === endCount && props.onFinish) {
+        if (currentCount === endCount && props.onFinish) {
             props.onFinish()
         }
     }
