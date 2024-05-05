@@ -2,7 +2,11 @@ import {useState} from "react";
 import {ConditionElephant} from "./ConditionElephant";
 import {ButtonFood} from "./ButtonFood";
 
-export function Elephant(props: any) {
+type Props = {
+    onReset: () => void
+}
+
+export function Elephant(props: Props) {
     const [weight, setWeight] = useState(7)
     const [live, setLive] = useState(true)
     const delta: number = 1
