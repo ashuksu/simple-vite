@@ -1,8 +1,6 @@
 import {useEffect, useState} from "react";
-import {TrackItem, type Tracks} from "./TrackItem";
-
-const API_URL = 'https://musicfun.it-incubator.app/api/1.0/playlists/tracks';
-const API_KEY = '315c4872-16bd-444d-b8d7-63702127f886';
+import {TrackItem} from "./TrackItem";
+import {getTracks, type Track} from "../data/api";
 
 interface Props {
     selectedTrackId: string | null;
@@ -10,16 +8,10 @@ interface Props {
 }
 
 export default function TrackList({selectedTrackId, onTrackSelect}: Props) {
-    const [tracks, setTracks] = useState<Array<Tracks> | null>(null);
+    const [tracks, setTracks] = useState<Array<Track> | null>(null);
 
     useEffect(() => {
-        fetch(API_URL, {
-            headers: {
-                'api-key': API_KEY
-            }
-        })
-            .then(res => res.json())
-            .then(json => setTracks(json.data))
+        getTracks().then(json => setTracks(json.data))
             .catch(err => console.error('Error Track List: ', err));
     }, []);
 

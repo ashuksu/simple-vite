@@ -1,30 +1,9 @@
 import {useEffect, useState} from "react";
-
-type TrackDetailsResource = {
-    id: string | null
-    attributes:  {
-        images?: {
-            main: Array<{
-                width: number
-                height: number
-                url: string
-            }>
-        }
-
-        title: string
-        attachments: Array<{
-            url: string;
-            updatedAt?: string
-        }>
-    }
-}
+import {getTrack, type TrackDetailsResource} from "../data/api";
 
 interface Props {
     trackId: string | null;
 }
-
-const API_URL = 'https://musicfun.it-incubator.app/api/1.0/playlists/tracks';
-const API_KEY = '315c4872-16bd-444d-b8d7-63702127f886';
 
 export default function TrackDetails({trackId}: Props) {
     const [selectedTrack, setSelectedTrack] = useState<TrackDetailsResource | null>(null);
@@ -37,12 +16,7 @@ export default function TrackDetails({trackId}: Props) {
 
         setSelectedTrack(null);
 
-        fetch(API_URL + '/' + trackId, {
-            headers: {
-                'api-key': API_KEY
-            }
-        })
-            .then(res => res.json())
+        getTrack(trackId)
             .then(json => setSelectedTrack(json.data))
             .catch(err => console.error('Error Selected Track: ' + err));
     }, [trackId]);

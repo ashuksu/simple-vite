@@ -1,13 +1,8 @@
-export type Tracks = {
-    id: string
-    attributes: {
-        title: string
-    }
-}
+import type {Track} from "../data/api";
 
 type Props = {
     index: number
-    track: Tracks
+    track: Track
     isSelected: boolean
     onSelect: (id: string) => void
 }
