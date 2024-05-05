@@ -9,12 +9,7 @@ export default function TrackDetails({trackId}: Props) {
     const [selectedTrack, setSelectedTrack] = useState<TrackDetailsResource | null>(null);
 
     useEffect(() => {
-        if (!trackId) {
-            setSelectedTrack(null);
-            return;
-        }
-
-        setSelectedTrack(null);
+        if (!trackId) return;
 
         getTrack(trackId)
             .then(json => setSelectedTrack(json.data))
