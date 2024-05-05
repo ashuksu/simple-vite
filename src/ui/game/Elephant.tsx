@@ -10,7 +10,7 @@ export function Elephant(props: Props) {
     const [weight, setWeight] = useState(7)
     const [live, setLive] = useState(true)
     const delta: number = 1
-    const minW : number= 5
+    const minW: number = 5
     const maxW: number = 10
     const titleCondition = !live && (weight <= minW)
         ? 'Слон умер от голода!'
