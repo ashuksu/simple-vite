@@ -1,4 +1,10 @@
-export function Counter(props) {
+type Props = {
+    count: number
+    setCount: (count: number) => void
+    onFinish?: () => void
+}
+
+export function Counter(props: Props) {
 
     const endCount = 5
 

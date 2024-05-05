@@ -1,6 +1,6 @@
 import {useState} from "react";
-import {Counter} from "./Counter.tsx";
-import {Elephant} from "./Elephant.tsx";
+import {Counter} from "./Counter";
+import {Elephant} from "./Elephant";
 
 export function Game() {
     const [count, setCount] = useState(0)
@@ -16,7 +16,7 @@ export function Game() {
     }
 
     return (
-        <div className='px-4 py-1'>
+        <div className='flex flex-col items-center px-4 py-1'>
             {active === 'counter' && <Counter count={count} setCount={setCount} onFinish={handleFinish}/>}
             {active === 'elephant' && <Elephant onReset={handleReset}/>}
         </div>

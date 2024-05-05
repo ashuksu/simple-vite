@@ -1,35 +1,16 @@
 import {useEffect, useState} from "react";
-import {TrackItem} from "./TrackItem.tsx";
-
-interface Track {
-    id: string;
-    attributes: {
-        title: string;
-        attachments?: {
-            url: string;
-            updatedAt: string;
-        }[];
-        images?: {
-            main?: {
-                height?: number;
-                width?: number;
-                url: string;
-            }[];
-        };
-    };
-}
-
-interface TrackListProps {
-    selectedTrackId: string | null;
-    onTrackSelect: (id: string | null) => void;
-}
-
+import {TrackItem, type Tracks} from "./TrackItem";
 
 const API_URL = 'https://musicfun.it-incubator.app/api/1.0/playlists/tracks';
 const API_KEY = '315c4872-16bd-444d-b8d7-63702127f886';
 
-export default function TrackList({selectedTrackId, onTrackSelect}: TrackListProps) {
-    const [tracks, setTracks] = useState<Track[] | null>(null);
+interface Props {
+    selectedTrackId: string | null;
+    onTrackSelect: (id: string | null) => void;
+}
+
+export default function TrackList({selectedTrackId, onTrackSelect}: Props) {
+    const [tracks, setTracks] = useState<Array<Tracks> | null>(null);
 
     useEffect(() => {
         fetch(API_URL, {
@@ -62,11 +43,11 @@ export default function TrackList({selectedTrackId, onTrackSelect}: TrackListPro
         );
     }
 
-    const handlResetClick = () => {
+    const handleResetClick = () => {
         onTrackSelect(null)
     }
 
-    const hendlClick = (id: string | null) => {
+    const handleClick = (id: string | null) => {
         onTrackSelect?.(id)
     }
 
@@ -77,7 +58,7 @@ export default function TrackList({selectedTrackId, onTrackSelect}: TrackListPro
             <button
                 className={`flex items-center justify-center mb-2.5 px-5 py-2.5 rounded-lg text-center text-lg text-gray-700
                         ${selectedTrackId ? 'bg-blue-200 cursor-pointer' : 'bg-blue-100 cursor-auto'}`}
-                onClick={handlResetClick}>
+                onClick={handleResetClick}>
                 Reset selection
             </button>
             {tracks.map((track, index) => {
@@ -86,7 +67,7 @@ export default function TrackList({selectedTrackId, onTrackSelect}: TrackListPro
                                index={index}
                                track={track}
                                isSelected={track.id === selectedTrackId}
-                               onSelect={hendlClick}
+                               onSelect={handleClick}
                     />
                 )
             })}

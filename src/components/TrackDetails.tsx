@@ -1,32 +1,33 @@
 import {useEffect, useState} from "react";
 
-interface Track {
-    id: string | null;
-    attributes: {
-        title: string;
-        attachments?: {
-            url: string;
-            updatedAt: string;
-        }[];
+type TrackDetailsResource = {
+    id: string | null
+    attributes:  {
         images?: {
-            main?: {
-                height?: number;
-                width?: number;
-                url: string;
-            }[];
-        };
-    };
+            main: Array<{
+                width: number
+                height: number
+                url: string
+            }>
+        }
+
+        title: string
+        attachments: Array<{
+            url: string;
+            updatedAt?: string
+        }>
+    }
 }
 
-interface TrackDetailsProps {
-    trackId?: string | null;
+interface Props {
+    trackId: string | null;
 }
 
 const API_URL = 'https://musicfun.it-incubator.app/api/1.0/playlists/tracks';
 const API_KEY = '315c4872-16bd-444d-b8d7-63702127f886';
 
-export default function TrackDetails({trackId}: TrackDetailsProps) {
-    const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
+export default function TrackDetails({trackId}: Props) {
+    const [selectedTrack, setSelectedTrack] = useState<TrackDetailsResource | null>(null);
 
     useEffect(() => {
         if (!trackId) {
@@ -73,7 +74,7 @@ export default function TrackDetails({trackId}: TrackDetailsProps) {
                         )}
 
                         <div className="updated-at image flex gap-3">
-                            {selectedTrack.attributes?.attachments?.[0].updatedAt && new Date(selectedTrack.attributes.attachments[0].updatedAt).toLocaleDateString()}
+                            {selectedTrack.attributes.attachments?.[0].updatedAt && new Date(selectedTrack.attributes.attachments[0].updatedAt).toLocaleDateString()}
                         </div>
                     </li>
                 )}
