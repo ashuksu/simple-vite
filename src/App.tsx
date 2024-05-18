@@ -9,8 +9,14 @@ export function App() {
   )
 }
 
+function useCounter(initialValue: number) {
+    const [value, setValue] = useState(initialValue);
+
+    return {value, setValue};
+}
+
 export function Counter() {
-    const [value, setValue] = useState(1);
+    const {value, setValue} = useCounter(1);
 
     return (
         <button
@@ -20,7 +26,7 @@ export function Counter() {
 }
 
 export function Age() {
-    const [value, setValue] = useState(10);
+    const {value, setValue} = useCounter(10);
 
     return (
         <button
