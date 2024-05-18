@@ -1,20 +1,20 @@
-import {clsx} from "clsx";
+import {cn} from "../../lib/utils.ts";
 
 type Props = {
-    styleCSS?: string
+    className?: string
     title: string
     handleFeedJunkFood: () => void
 }
 
-export function ButtonFood(props: Props) {
+export function ButtonFood({title, className, handleFeedJunkFood}: Props) {
     return (
         <button
-            className={clsx([
-                props.styleCSS,
+            className={cn(
+                className,
                 'flex items-center justify-center gap-2 p-2.5 w-1/2 rounded-md text-white cursor-pointer'
-            ])}
-            onClick={props.handleFeedJunkFood}>
-            {props.title}
+            )}
+            onClick={handleFeedJunkFood}>
+            {title}
         </button>
     )
 }

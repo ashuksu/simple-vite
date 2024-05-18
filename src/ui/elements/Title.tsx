@@ -1,17 +1,17 @@
-import {clsx} from "clsx";
+import {cn} from "../../lib/utils";
 
 interface TitleProps {
     title: string;
-    styleCSS?: string;
+    className?: string;
 }
 
-export default function Title(props: TitleProps) {
+export default function Title({title, className}: TitleProps) {
     return (
-        <h2 className={clsx([
-            props.styleCSS,
-            'font-bold text-2xl text-center'
-        ])}>
-            {props.title}
+        <h2 className={cn(
+            'text-gray-50 font-bold text-2xl text-center',
+            className
+        )}>
+            {title}
         </h2>
     )
 };
