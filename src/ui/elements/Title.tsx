@@ -1,3 +1,5 @@
+import {clsx} from "clsx";
+
 interface TitleProps {
     title: string;
     styleCSS?: string;
@@ -5,7 +7,10 @@ interface TitleProps {
 
 export default function Title(props: TitleProps) {
     return (
-        <h2 className={`${props.styleCSS ?? ''} font-bold text-2xl text-center`}>
+        <h2 className={clsx([
+            props.styleCSS,
+            'font-bold text-2xl text-center'
+        ])}>
             {props.title}
         </h2>
     )
