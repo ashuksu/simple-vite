@@ -1,21 +1,8 @@
-type Props = {
-    count: number
-    setCount: (count: number) => void
-    onFinish?: () => void
-}
+import {type Props, useCounter} from "../../bll/game/useCounter";
+
 
 export function Counter(props: Props) {
-
-    const endCount = 5
-
-    const handleClick = () => {
-        const currentCount = props.count + 1;
-        props.setCount(currentCount)
-
-        if (currentCount === endCount && props.onFinish) {
-            props.onFinish()
-        }
-    }
+    const {endCount, handleClick} = useCounter(props);
 
     return (
         <>
