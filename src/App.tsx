@@ -4,6 +4,8 @@ export function App() {
     return (
         <>
             <LightSwitch/>
+            <br/>
+            <LightSwitch2/>
         </>
     )
 }
@@ -25,6 +27,20 @@ export const LightSwitch = () => {
         <div>
             <h2>{isOn ? "💡 Свет включен" : "🌙 Свет выключен"}</h2>
             <button onClick={toggle}>Переключить свет</button>
+        </div>
+    )
+}
+
+export const LightSwitch2 = () => {
+    const {isOn, toggle, setIsOn} = useToggle(true)
+
+    return (
+        <div>
+            <h2>{isOn ? "💡 Свет включен" : "🌙 Свет выключен"}</h2>
+            <button onClick={toggle}>Переключить свет</button>
+            <br/>
+            <button onClick={() => setIsOn(true)}>Включить 💡</button>
+            <button onClick={() => setIsOn(false)}>Выключить 🌙</button>
         </div>
     )
 }
