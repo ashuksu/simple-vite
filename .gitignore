@@ -1,0 +1,35 @@
+# Git
+.git
+.gitignore
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Node.js
+node_modules
+npm-debug.log
+package-lock.json
+
+# Vite
+dist
+public/assets/dist
+.vite
+*.local
+
+# IDE files
+.idea
+.idea/
+.vscode
+.vscode/
+*.sublime-workspace
+*.sublime-project
+/.htaccess
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test
+test
