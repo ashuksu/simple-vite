@@ -1,3 +1,7 @@
+<?php
+
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -6,8 +10,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="description" content="Simple project using Vite for the frontend and PHP for the backend.">
     <title>PHP + Vite Template</title>
+
+    <link rel="stylesheet" href="/src/css/style.css">
 </head>
 <body>
 <div>Hello world!</div>
+<img src="images/vite.svg" alt="image">
+<script type="module" src="/src/js/script.js"></script>
 </body>
 </html>
