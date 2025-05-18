@@ -1,0 +1,21 @@
+{
+  "name": "simple-vite-php",
+  "version": "1.0.0",
+  "description": "Simple project using Vite for the frontend and PHP for the backend.",
+  "type": "module",
+  "main": "public/index.php",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5"
+  }
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashuksu/simple-vite-php.git"
+  },
+  "author": "ashuksu",
+  "license": "ISC"
+}
