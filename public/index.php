@@ -14,8 +14,14 @@
     <link rel="stylesheet" href="/src/css/style.css">
 </head>
 <body>
-<div>Hello world!</div>
-<img src="images/vite.svg" alt="image">
-<script type="module" src="/src/js/script.js"></script>
+
+<h1>Hello world!</h1>
+
+    <button id="clickMe" data-text="Hello world">click me</button>
+
+    <img src="images/vite.svg" alt="image">
+
+    <script type="module" src="/src/js/script.js"></script>
+
 </body>
 </html>
