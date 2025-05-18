@@ -19,7 +19,7 @@
 
     <button id="clickMe" data-text="Hello world">click me</button>
 
-    <img src="images/vite.svg" alt="image">
+    <img src="assets/images/vite.svg" alt="image">
 
     <script type="module" src="/src/js/script.js"></script>
 
