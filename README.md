@@ -1,10 +1,9 @@
-# PHP + Vite Template
+# Vite Template
 
-Simple project using Vite for the frontend and PHP for the backend.
-A development template that integrates PHP with Vite.js for modern frontend tooling. Features hot module replacement (HMR) and optimized asset bundling.
+Simple project using Vite for the frontend
+A development template with Vite.js for modern frontend tooling. Features hot module replacement (HMR) and optimized asset bundling.
 
 ## Tech Stack
-- PHP
 - Vite.js (v6.3.5)
 - JavaScript (ES Modules)
 - CSS
