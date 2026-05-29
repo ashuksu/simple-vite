@@ -1,3 +1,5 @@
+import {API_KEY, API_URL} from "../config";
+
 export type GetTrackDetailsOutput = { data: TrackDetailsResource }
 export type GetTrackListOutput = { data: Array<Track> }
 
@@ -26,9 +28,6 @@ export type TrackDetailsResource = {
         }>
     }
 }
-
-const API_URL = import.meta.env.VITE_API_URL;
-const API_KEY = import.meta.env.VITE_API_KEY;
 
 export function getTrack(trackId: string): Promise<GetTrackDetailsOutput> {
     return fetch(API_URL + '/' + trackId, {
