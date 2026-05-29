@@ -1,5 +1,19 @@
-export function TrackItem({index, track, isSelected, onSelect}) {
-    const handlClick = () => onSelect?.(track.id);
+export type Tracks = {
+    id: string
+    attributes: {
+        title: string
+    }
+}
+
+type Props = {
+    index: number
+    track: Tracks
+    isSelected: boolean
+    onSelect: (id: string) => void
+}
+
+export function TrackItem({index, track, isSelected, onSelect}: Props) {
+    const handleClick = (): void => onSelect?.(track.id);
 
     return (
         <div
@@ -10,7 +24,7 @@ export function TrackItem({index, track, isSelected, onSelect}) {
                 before:inset-s-2.5 before:inset-bs-2.5
                 relative cursor-pointer flex flex-col w-full py-2.5 px-5 pl-10 gap-2.5 border-2 
                 ${isSelected ? 'border-red-500 border-2' : 'border-transparent'}`}
-            onClick={handlClick}>
+            onClick={handleClick}>
 
             <p className='break-all text-left'>
                 {track.attributes.title}
