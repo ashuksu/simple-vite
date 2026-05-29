@@ -1,5 +1,5 @@
 import {createRoot} from 'react-dom/client'
-import MainPage from "./components/pages/MainPage";
+import MainPage from "./ui/pages/MainPage";
 import './index.css'
 
 createRoot(document.getElementById('root')!).render(
