@@ -5,7 +5,7 @@ import SidebarMenu from "../layouts/SidebarMenu";
 import {uaeTrackSelection} from "../../bll/uaeTrackSelection";
 
 export default function MainPage() {
-   const {trackId, setTrackId} = uaeTrackSelection();
+    const {trackId, setTrackId} = uaeTrackSelection();
     const handleTrackSelect = (id: string | null) => setTrackId(id)
 
     return (

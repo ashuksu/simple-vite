@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default function TrackList({selectedTrackId, onTrackSelect}: Props) {
-   const {tracks} = useTracks();
+    const {tracks} = useTracks();
 
     if (tracks === null) {
         return (

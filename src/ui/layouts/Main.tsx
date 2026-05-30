@@ -6,7 +6,7 @@ interface MainProps {
     onTrackSelect: (id: string | null) => void;
 }
 
-export default function Main({ trackId, onTrackSelect }: MainProps) {
+export default function Main({trackId, onTrackSelect}: MainProps) {
     return (
         <section className="section w-1/2">
             <Title title='Track List' styleCSS='text-gray-50 mb-5'/>
