@@ -1,5 +1,6 @@
 import {TrackItem} from "./TrackItem";
 import {useTracks} from "../bll/useTracks";
+import {clsx} from "clsx";
 
 interface Props {
     selectedTrackId: string | null;
@@ -37,13 +38,17 @@ export default function TrackList({selectedTrackId, onTrackSelect}: Props) {
         onTrackSelect?.(id)
     }
 
+    const cssButton = [
+        'flex items-center justify-center mb-2.5 px-5 py-2.5 rounded-lg text-center text-lg text-gray-700 cursor-pointer',
+        selectedTrackId ? 'bg-blue-200 cursor-pointer' : 'bg-blue-100 cursor-auto'
+    ]
+
     return (
         <div
             className={`list flex flex-col items-center justify-center 
                 bg-gray-200 rounded-lg p-6 text-gray-700 text-lg`}>
             <button
-                className={`flex items-center justify-center mb-2.5 px-5 py-2.5 rounded-lg text-center text-lg text-gray-700
-                        ${selectedTrackId ? 'bg-blue-200 cursor-pointer' : 'bg-blue-100 cursor-auto'}`}
+                className={clsx(cssButton)}
                 onClick={handleResetClick}>
                 Reset selection
             </button>
