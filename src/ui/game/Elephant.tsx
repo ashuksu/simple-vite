@@ -35,12 +35,12 @@ export function Elephant(props: Props) {
                         </p>
                         <div className="flex items-center gap-3 max-w-60">
                             <ButtonFood
-                                styleCSS='bg-green-500'
+                                className='bg-green-500'
                                 handleFeedJunkFood={handleFeedHealthyFood}
                                 title='Кормить слона полезной едой 🥬🍉🍌'/>
                             <ButtonFood
                                 handleFeedJunkFood={handleFeedJunkFood}
-                                styleCSS='bg-red-500'
+                                className='bg-red-500'
                                 title='Кормить слона вредной едой 🍔🍬🍕'/>
                         </div>
                     </>

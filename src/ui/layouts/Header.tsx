@@ -4,7 +4,7 @@ export default function Header() {
     return (
         <header className='header shrink-0 bg-gray-800'>
             <div className="container flex justify-center items-center py-3  text-white">
-                <Title title='Header'/>
+                <Title title='Header' className='text-white'/>
             </div>
         </header>
     )
