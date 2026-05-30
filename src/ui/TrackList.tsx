@@ -1,6 +1,5 @@
-import {useEffect, useState} from "react";
 import {TrackItem} from "./TrackItem";
-import {getTracks, type Track} from "../data/api";
+import {useTracks} from "../bll/useTracks";
 
 interface Props {
     selectedTrackId: string | null;
@@ -8,12 +7,7 @@ interface Props {
 }
 
 export default function TrackList({selectedTrackId, onTrackSelect}: Props) {
-    const [tracks, setTracks] = useState<Array<Track> | null>(null);
-
-    useEffect(() => {
-        getTracks().then(json => setTracks(json.data))
-            .catch(err => console.error('Error Track List: ', err));
-    }, []);
+   const {tracks} = useTracks();
 
     if (tracks === null) {
         return (

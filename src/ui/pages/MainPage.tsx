@@ -1,12 +1,11 @@
-import {useState} from "react";
 import Footer from "../layouts/Footer";
 import Header from "../layouts/Header";
 import Main from "../layouts/Main";
 import SidebarMenu from "../layouts/SidebarMenu";
+import {uaeTrackSelection} from "../../bll/uaeTrackSelection";
 
 export default function MainPage() {
-    const [trackId, setTrackId] = useState<string | null>(null);
-
+   const {trackId, setTrackId} = uaeTrackSelection();
     const handleTrackSelect = (id: string | null) => setTrackId(id)
 
     return (
