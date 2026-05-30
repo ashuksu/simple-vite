@@ -1,4 +1,4 @@
-import type {Track} from "../data/api";
+import type {Track} from "../dal/api";
 import {clsx} from "clsx";
 
 type Props = {

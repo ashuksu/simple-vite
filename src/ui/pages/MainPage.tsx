@@ -2,10 +2,10 @@ import Footer from "../layouts/Footer";
 import Header from "../layouts/Header";
 import Main from "../layouts/Main";
 import SidebarMenu from "../layouts/SidebarMenu";
-import {uaeTrackSelection} from "../../bll/uaeTrackSelection";
+import {useTrackSelection} from "../../bll/useTrackSelection";
 
 export default function MainPage() {
-    const {trackId, setTrackId} = uaeTrackSelection();
+    const {trackId, setTrackId} = useTrackSelection();
     const handleTrackSelect = (id: string | null) => setTrackId(id)
 
     return (
