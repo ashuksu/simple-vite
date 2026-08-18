@@ -30,7 +30,7 @@ jobs:
         uses: actions/setup-node@v7
         with:
           node-version: 24
-          cache: 'npm'
+          cache: "npm"
 
       - name: Install Dependencies (node modules)
         run: npm ci
@@ -42,6 +42,7 @@ jobs:
         env:
           VITE_API_URL: ${{ vars.VITE_API_URL }}
           VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
+          BASE_PATH: "/simple-vite/"
         run: npm run build
 
       - name: Setup Pages
@@ -50,7 +51,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: './dist'
+          path: "./dist"
 
       - name: Deploy to GitHub Pages
         id: deployment
