@@ -35,6 +35,9 @@ jobs:
       - name: Install Dependencies (node modules)
         run: npm ci
 
+      - name: ESLinter
+        run: npm run lint
+
       - name: Build Project
         run: npm run build
 
