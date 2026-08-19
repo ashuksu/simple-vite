@@ -29,32 +29,27 @@ export type TrackDetailsResource = {
     }
 }
 
-export function getTrack(trackId: string): Promise<GetTrackDetailsOutput> {
-    return fetch(API_URL + '/' + trackId, {
-        headers: {
-            'api-key': API_KEY
-        }
-    })
-        .then(res => {
-            if (!res.ok) {
-                throw new Error(`HTTP error! status (Track Detail): ${res.status}`);
-            }
-
-            return res.json();
-        });
-}
+const TRACKS_URL = `${API_URL}/playlists/tracks`;
 
 export function getTracks(): Promise<GetTrackListOutput> {
-    return fetch(API_URL, {
+    return fetch(TRACKS_URL, {
         headers: {
             'api-key': API_KEY
         }
+    }).then(res => {
+        if (!res.ok) throw new Error(`HTTP error! status (Track List): ${res.status}`);
+        return res.json();
     })
-        .then(res => {
-            if (!res.ok) {
-                throw new Error(`HTTP error! status (Track List): ${res.status}`);
-            }
+}
 
-            return res.json()
-        })
+
+export function getTrack(trackId: string): Promise<GetTrackDetailsOutput> {
+    return fetch(TRACKS_URL + '/' + trackId, {
+        headers: {
+            'api-key': API_KEY
+        }
+    }).then(res => {
+        if (!res.ok) throw new Error(`HTTP error! status (Track Detail): ${res.status}`);
+        return res.json();
+    });
 }
