@@ -6,7 +6,7 @@
       "ES2023",
       "DOM"
     ],
-    "module": "esnext",
+    "module": "ESNext",
     "types": [
       "vite/client",
       "node"
@@ -14,7 +14,7 @@
     "allowArbitraryExtensions": true,
     "skipLibCheck": true,
     /* Bundler mode */
-    "moduleResolution": "bundler",
+    "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
@@ -24,7 +24,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true
   },
   "include": [
     "src"

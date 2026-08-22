@@ -6,6 +6,8 @@ dist
 dist-ssr
 gh-pages
 test
+.tanstack
+.vite
 
 # Environment
 .env
