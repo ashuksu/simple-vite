@@ -3,7 +3,15 @@ import {ButtonFood} from "./ButtonFood";
 import {type Props, useElephant} from "../../bll/game/useElephant";
 
 export function Elephant(props: Props) {
-    const {weight, minW, live, titleCondition, handleClick, handleFeedHealthyFood, handleFeedJunkFood} = useElephant(props);
+    const {
+        weight,
+        minW,
+        live,
+        titleCondition,
+        handleClick,
+        handleFeedHealthyFood,
+        handleFeedJunkFood
+    } = useElephant(props);
 
     return (
         <>

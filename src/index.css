@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+@layer base {
+    h1 {
+        @apply text-3xl font-bold my-4;
+    }
+
+    h2 {
+        @apply text-2xl font-bold my-3;
+    }
+
+    h3 {
+        @apply text-xl font-semibold my-2;
+    }
+}
+
 :root {
     --text: #6b6375;
     --text-h: #08060d;

@@ -1,8 +1,8 @@
-name: Deploy static content (Simple Vite) to GitHub Pages
+name: Deploy static content to GitHub Pages
 
 on:
   push:
-    branches: ["master"]
+    branches: [ "dev" ]
   workflow_dispatch:
 
 permissions:
@@ -26,24 +26,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Setup Node.js v24
-        uses: actions/setup-node@v7
+      - name: Setup Node.js & pnpm
+        uses: pnpm/setup@v1
         with:
-          node-version: 24
-          cache: "npm"
+          version: latest
+          runtime: node@24
+          cache: true
 
-      - name: Install Dependencies (node modules)
-        run: npm ci
+      - name: Install Dependencies (pnpm, node_modules)
+        run: pnpm install --frozen-lockfile
 
       - name: ESLinter
-        run: npm run lint
+        run: pnpm run lint
+
+      - name: Resolve BASE path
+        id: base
+        run: echo "path=/${GITHUB_REPOSITORY#*/}/" >> "$GITHUB_OUTPUT"
 
       - name: Build Project
         env:
           VITE_API_URL: ${{ vars.VITE_API_URL }}
           VITE_API_KEY: ${{ secrets.VITE_API_KEY }}
-          BASE_PATH: "/simple-vite/"
-        run: npm run build
+          BASE_PATH: ${{ steps.base.outputs.path }}
+        run: pnpm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v6

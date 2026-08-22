@@ -5,10 +5,10 @@ import pkg from './package.json' with {type: 'json'}
 
 export default defineConfig(({mode}) => {
     const env = loadEnv(mode, process.cwd(), '');
+    const basePath = env.BASE_PATH || process.env.BASE_PATH || `/${pkg.name}/`;
 
     return {
-        base: env.BASE_PATH || process.env.BASE_PATH || `/${pkg.name}/`,
-
+        base: basePath,
         plugins: [
             react(),
             tailwindcss(),

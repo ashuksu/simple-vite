@@ -3,6 +3,7 @@ import {useState} from "react";
 export type Props = {
     onReset: () => void
 }
+
 export function useElephant(props: Props) {
     const [weight, setWeight] = useState(7)
     const [live, setLive] = useState(true)
