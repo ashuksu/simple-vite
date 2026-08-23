@@ -1,10 +1,10 @@
-import Title from "../elements/Title";
+import {Nav} from "./Nav.tsx";
 
-export default function Header() {
+export function Header() {
     return (
-        <header className='header shrink-0 bg-gray-800'>
-            <div className="container flex justify-center items-center py-3  text-white">
-                <Title title='Header' className='text-white'/>
+        <header className='header shrink-0 bg-gray-800 border-b border-b-gray-600'>
+            <div className="container flex items-center py-3  text-white">
+                <Nav/>
             </div>
         </header>
     )
