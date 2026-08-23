@@ -1,3 +1,7 @@
 export function AboutPage() {
-    return <div className="p-2">Hello from About!</div>
+    return (
+        <div className="container">
+            Hello from About!
+        </div>
+    )
 }

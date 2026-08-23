@@ -1,7 +1,7 @@
-import {MusicFanPage} from "./MusicFanPage.tsx";
-
 export function MainPage() {
     return (
-        <MusicFanPage/>
+        <div className="container">
+            Hello from Home!
+        </div>
     )
 }
