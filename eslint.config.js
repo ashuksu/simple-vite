@@ -8,7 +8,7 @@ import pluginQuery from '@tanstack/eslint-plugin-query'
 
 export default defineConfig([
     ...pluginQuery.configs['flat/recommended'],
-    globalIgnores(['dist']),
+    globalIgnores(['dist', '.tanstack']),
     {
         files: ['**/*.{ts,tsx}'],
         extends: [
@@ -19,6 +19,13 @@ export default defineConfig([
         ],
         languageOptions: {
             globals: globals.browser,
+        },
+    },
+    // Disable the Fast Refresh rule for TanStack route files
+    {
+        files: ['src/routes/**/*.{ts,tsx}'],
+        rules: {
+            'react-refresh/only-export-components': 'off',
         },
     },
 ])
