@@ -84,10 +84,3 @@ html, body, #root {
     padding-inline: 1rem;
     margin-inline: auto;
 }
-
-.main {
-    display: flex;
-    flex: 1 0 auto;
-    gap: 1rem;
-    padding-block: 1rem;
-}
