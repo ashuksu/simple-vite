@@ -1,5 +1,5 @@
 import type {Track} from "../dal/api";
-import {cn} from "../lib/utils.ts";
+import {tv} from 'tailwind-variants';
 import type {CSSProperties} from "react";
 
 type Props = {
@@ -9,22 +9,28 @@ type Props = {
     onSelect: (id: string) => void
 }
 
-export function TrackItem({index, track, isSelected, onSelect}: Props) {
-    const handleClick = (): void => onSelect?.(track.id);
-
-    const className = [
+const className = tv({
+    base: [
         'item before:content-(--index-track) before:absolute before:inset-s-2.5 before:inset-bs-2.5',
         'relative cursor-pointer flex flex-col w-full py-2.5 px-5 pl-10 gap-2.5 border-2',
-        isSelected ? 'border-(--alert) border-2' : 'border-transparent',
-        'data-[selected=true]:text-4xl',
-    ]
+        'data-[selected=true]:text-4xl'
+    ],
+    variants: {
+        isSelected: {
+            true: 'border-(--alert) border-2',
+            false: 'border-transparent'
+        }
+    }
+});
 
+export function TrackItem({index, track, isSelected, onSelect}: Props) {
+    const handleClick = (): void => onSelect?.(track.id);
     const trackIndexStyle = (index: number) => ({'--index-track': `"${index + 1}"`} as CSSProperties);
 
     return (
         <div
             style={trackIndexStyle(index)}
-            className={cn(className)}
+            className={className({isSelected})}
             onClick={handleClick}
             data-selected={isSelected}>
             <p className='break-all text-left'>

@@ -1,6 +1,7 @@
 import {ConditionElephant} from "./ConditionElephant";
 import {ButtonFood} from "./ButtonFood";
 import {type Props, useElephant} from "../../bll/game/useElephant";
+import {cx} from "tailwind-variants";
 
 export function Elephant(props: Props) {
     const {
@@ -15,9 +16,9 @@ export function Elephant(props: Props) {
 
     return (
         <>
-            <div className={`flex justify-center w-50 h-40 pb-3 relative z-1 
-                ${live || weight <= minW ? 'items-end' : 'items-start'}`}
-            >
+            <div className={cx([
+                'flex justify-center w-50 h-40 pb-3 relative z-1',
+                live || (weight <= minW) ? 'items-end' : 'items-start'])}>
                 <div
                     style={{
                         fontSize: `${weight}rem`,

@@ -1,4 +1,4 @@
-import {cn} from "../../lib/utils";
+import {cx} from "tailwind-variants";
 
 type Props = {
     className?: string
@@ -9,10 +9,9 @@ type Props = {
 export function ButtonFood({title, className, handleFeedJunkFood}: Props) {
     return (
         <button
-            className={cn(
-                className,
-                'flex items-center justify-center gap-2 p-2.5 w-1/2 rounded-md text-white cursor-pointer'
-            )}
+            className={cx(
+                'flex items-center justify-center gap-2 p-2.5 w-1/2 rounded-md text-white cursor-pointer',
+                className)}
             onClick={handleFeedJunkFood}>
             {title}
         </button>
