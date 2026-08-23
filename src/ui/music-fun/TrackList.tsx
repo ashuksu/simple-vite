@@ -1,13 +1,13 @@
-import {TrackItem} from "./TrackItem";
-import {useTracks} from "../bll/useTracks";
-import {clsx} from "clsx";
+import {TrackItem} from "./TrackItem.tsx";
+import {useTracks} from "../../bll/music-fun/useTracks.tsx";
+import {cx} from "tailwind-variants";
 
 interface Props {
     selectedTrackId: string | null;
     onTrackSelect: (id: string | null) => void;
 }
 
-export default function TrackList({selectedTrackId, onTrackSelect}: Props) {
+export function TrackList({selectedTrackId, onTrackSelect}: Props) {
     const {tracks} = useTracks();
 
     if (tracks === null) {
@@ -48,7 +48,7 @@ export default function TrackList({selectedTrackId, onTrackSelect}: Props) {
             className={`list flex flex-col items-center justify-center 
                 bg-gray-200 rounded-lg p-6 text-gray-700 text-lg`}>
             <button
-                className={clsx(cssButton)}
+                className={cx(cssButton)}
                 onClick={handleResetClick}>
                 Reset selection
             </button>

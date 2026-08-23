@@ -1,4 +1,3 @@
-
 export type Props = {
     count: number
     setCount: (count: number) => void

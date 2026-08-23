@@ -1,8 +1,27 @@
 @import "tailwindcss";
 
+@theme {
+    --color-myPurpur: rgba(234, 0, 214, 0.44);
+}
+
+@layer base {
+    h1 {
+        @apply text-3xl font-bold my-4;
+    }
+
+    h2 {
+        @apply text-2xl font-bold my-3;
+    }
+
+    h3 {
+        @apply text-xl font-semibold my-2;
+    }
+}
+
 :root {
     --text: #6b6375;
     --text-h: #08060d;
+    --alert: #f00;
     --bg: #fff;
     --border: #e5e4e7;
     --code-bg: #f4f3ec;
@@ -71,9 +90,25 @@ html, body, #root {
     margin-inline: auto;
 }
 
-.main {
-    display: flex;
-    flex: 1 0 auto;
-    gap: 1rem;
-    padding-block: 1rem;
+@utility list {
+    @apply relative flex flex-col w-full py-2.5 px-5 pl-10 gap-2.5 border-2 rounded-lg cursor-pointer transition-all;
+
+    &:hover {
+        @apply border-purple-500/50 bg-white/80 shadow-md scale-[1.01];
+    }
+
+    /* (data-selected="true") */
+    .item {
+        &:hover {
+            @apply bg-amber-200;
+        }
+
+        &[data-selected="true"] {
+            @apply border-green-500 bg-red-500/10 text-blue-300 shadow-lg;
+        }
+    }
+
+    &:disabled {
+        @apply opacity-50 cursor-not-allowed pointer-events-none;
+    }
 }

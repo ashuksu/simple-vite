@@ -1,7 +1,7 @@
-export function MainPage() {
+export function AboutPage() {
     return (
         <div className="container">
-            Hello from Home!
+            Hello from About!
         </div>
     )
 }

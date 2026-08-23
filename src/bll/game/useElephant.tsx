@@ -3,6 +3,7 @@ import {useState} from "react";
 export type Props = {
     onReset: () => void
 }
+
 export function useElephant(props: Props) {
     const [weight, setWeight] = useState(7)
     const [live, setLive] = useState(true)
@@ -10,8 +11,8 @@ export function useElephant(props: Props) {
     const minW: number = 5
     const maxW: number = 10
     const titleCondition = !live && (weight <= minW)
-        ? 'Слон умер от голода!'
-        : 'Умер от ожирения!'
+        ? 'The elephant died of starvation!'
+        : 'The elephant died of obesity!'
 
     const handleClick = () => {
         if (props.onReset) {

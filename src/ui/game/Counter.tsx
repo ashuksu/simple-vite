@@ -6,7 +6,7 @@ export function Counter(props: Props) {
 
     return (
         <>
-            <h2 className='py-3'>Нажми на кнопку {endCount} раза, чтобы увидеть слона</h2>
+            <h2 className='mt-0'>Click the button {endCount} times to see the elephant</h2>
             <button
                 className={`flex items-center justify-center w-max gap-2 py-2.5 px-4
                     bg-amber-500 rounded-md text-black  cursor-pointer`}
