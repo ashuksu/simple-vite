@@ -1,6 +1,6 @@
 import {TrackItem} from "./TrackItem";
 import {useTracks} from "../bll/useTracks";
-import {clsx} from "clsx";
+import {cx} from "tailwind-variants";
 
 interface Props {
     selectedTrackId: string | null;
@@ -48,7 +48,7 @@ export default function TrackList({selectedTrackId, onTrackSelect}: Props) {
             className={`list flex flex-col items-center justify-center 
                 bg-gray-200 rounded-lg p-6 text-gray-700 text-lg`}>
             <button
-                className={clsx(cssButton)}
+                className={cx(cssButton)}
                 onClick={handleResetClick}>
                 Reset selection
             </button>

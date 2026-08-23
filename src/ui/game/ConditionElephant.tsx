@@ -4,7 +4,7 @@ type Props = {
 
 export function ConditionElephant(props: Props) {
     return (
-        <h2 className='py-3 font-bold text-2xl text-red-500'>
+        <h2 className='font-bold text-2xl text-red-500'>
             {props.title}
         </h2>
     )
