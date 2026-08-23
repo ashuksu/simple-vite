@@ -1,19 +1,16 @@
-import {Link, Outlet} from "@tanstack/react-router";
+import {Outlet} from "@tanstack/react-router";
 import {TanStackRouterDevtools} from "@tanstack/react-router-devtools";
+import {Header} from "./Header.tsx";
+import {Footer} from "./Footer.tsx";
 
 export function RootLayout() {
     return (
         <>
-            <div className="p-2 flex gap-2">
-                <Link to="/" className="[&.active]:font-bold">
-                    Home
-                </Link>{' '}
-                <Link to="/about" className="[&.active]:font-bold">
-                    About
-                </Link>
-            </div>
-            <hr/>
-            <Outlet/>
+            <Header/>
+            <main className="flex flex-col flex-1 gap-3 py-5">
+                <Outlet/>
+            </main>
+            <Footer/>
             <TanStackRouterDevtools/>
         </>
     )
