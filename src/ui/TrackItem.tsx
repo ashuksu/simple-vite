@@ -1,5 +1,6 @@
 import type {Track} from "../dal/api";
-import {clsx} from "clsx";
+import {cn} from "../lib/utils.ts";
+import type {CSSProperties} from "react";
 
 type Props = {
     index: number
@@ -11,18 +12,21 @@ type Props = {
 export function TrackItem({index, track, isSelected, onSelect}: Props) {
     const handleClick = (): void => onSelect?.(track.id);
 
-    const css = [
-        'before:content-(--index-track) before:absolute before:inset-s-2.5 before:inset-bs-2.5',
+    const className = [
+        'item before:content-(--index-track) before:absolute before:inset-s-2.5 before:inset-bs-2.5',
         'relative cursor-pointer flex flex-col w-full py-2.5 px-5 pl-10 gap-2.5 border-2',
-        isSelected ? 'border-red-500 border-2' : 'border-transparent'
+        isSelected ? 'border-(--alert) border-2' : 'border-transparent',
+        'data-[selected=true]:text-4xl',
     ]
+
+    const trackIndexStyle = (index: number) => ({'--index-track': `"${index + 1}"`} as CSSProperties);
 
     return (
         <div
-            style={{'--index-track': `"${index + 1}"`} as React.CSSProperties}
-            className={clsx(css)}
-            onClick={handleClick}>
-
+            style={trackIndexStyle(index)}
+            className={cn(className)}
+            onClick={handleClick}
+            data-selected={isSelected}>
             <p className='break-all text-left'>
                 {track.attributes.title}
             </p>
