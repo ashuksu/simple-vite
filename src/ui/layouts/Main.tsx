@@ -1,4 +1,4 @@
-import Title from "../elements/Title";
+import {Title} from "../elements/Title";
 import TrackList from "../TrackList";
 
 interface MainProps {
@@ -9,7 +9,7 @@ interface MainProps {
 export default function Main({trackId, onTrackSelect}: MainProps) {
     return (
         <section className="section w-1/2">
-            <Title title='Track List' className='mb-5'/>
+            <Title title='Track List'/>
             <TrackList selectedTrackId={trackId} onTrackSelect={onTrackSelect}/>
         </section>
     );
