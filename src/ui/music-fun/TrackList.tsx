@@ -1,5 +1,5 @@
-import {TrackItem} from "./TrackItem";
-import {useTracks} from "../bll/useTracks";
+import {TrackItem} from "./TrackItem.tsx";
+import {useTracks} from "../../bll/music-fun/useTracks.tsx";
 import {cx} from "tailwind-variants";
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
     onTrackSelect: (id: string | null) => void;
 }
 
-export default function TrackList({selectedTrackId, onTrackSelect}: Props) {
+export function TrackList({selectedTrackId, onTrackSelect}: Props) {
     const {tracks} = useTracks();
 
     if (tracks === null) {

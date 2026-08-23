@@ -1,4 +1,4 @@
-import type {Track} from "../dal/api";
+import type {Track} from "../../dal/api.ts";
 import {tv} from 'tailwind-variants';
 import type {CSSProperties} from "react";
 
