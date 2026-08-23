@@ -22,10 +22,10 @@ export default defineConfig([
         },
     },
     // Disable the Fast Refresh rule for TanStack route files
-    {
-        files: ['src/routes/**/*.{ts,tsx}'],
-        rules: {
-            'react-refresh/only-export-components': 'off',
-        },
-    },
+    // {
+    //     files: ['src/routes/**/*.{ts,tsx}'],
+    //     rules: {
+    //         'react-refresh/only-export-components': 'off',
+    //     },
+    // },
 ])

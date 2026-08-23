@@ -1,24 +1,7 @@
-import Footer from "../layouts/Footer";
-import Header from "../layouts/Header";
-import Main from "../layouts/Main";
-import SidebarMenu from "../layouts/SidebarMenu";
-import {useTrackSelection} from "../../bll/useTrackSelection";
+import {MusicFanPage} from "./MusicFanPage.tsx";
 
-export default function MainPage() {
-    const {trackId, setTrackId} = useTrackSelection();
-    const handleTrackSelect = (id: string | null) => setTrackId(id)
-
+export function MainPage() {
     return (
-        <>
-            <Header/>
-            <main className="main container">
-                <Main
-                    trackId={trackId}
-                    onTrackSelect={handleTrackSelect}
-                />
-                <SidebarMenu trackId={trackId}/>
-            </main>
-            <Footer/>
-        </>
+        <MusicFanPage/>
     )
 }
