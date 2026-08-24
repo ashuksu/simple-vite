@@ -25,9 +25,9 @@ export default defineConfig(({mode}) => {
 })
 
 /**
-    Generates dist/404.html for GitHub Pages SPA fallback.
-    pathSegmentsToKeep is calculated from basePath, not hardcoded
-*/
+ Generates dist/404.html for GitHub Pages SPA fallback.
+ pathSegmentsToKeep is calculated from basePath, not hardcoded
+ */
 function spaFallback404(basePath: string): Plugin {
     return {
         name: 'spa-fallback-404',

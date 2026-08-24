@@ -37,6 +37,7 @@ const PAGE_SIZE = (value?: number) => value !== undefined ? `?pageSize=${value}`
 const TRACKS_URL = `${API_URL}playlists/tracks`;
 const LIMITED_TRACKS_URL = `${TRACKS_URL}${PAGE_SIZE(5)}`; // 5 tracks per page
 const headers: HeadersInit = API_KEY ? {'api-key': API_KEY} : {};
+
 export async function getTracks(): Promise<GetTrackListOutput> {
     const res = await fetch(LIMITED_TRACKS_URL, {headers});
 
