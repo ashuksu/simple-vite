@@ -21,7 +21,7 @@ export const Route = createFileRoute('/about')({
         ],
         // 3. Scripts (if you need a rare third-party script only on this page)
         scripts: [
-            {src: 'https://example.com/some-widget.js', async: true}
+            // {src: 'https://example.com/some-widget.js', async: true}
         ]
     }),
     component: AboutPage,

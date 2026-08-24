@@ -34,7 +34,7 @@ export type GetTrackDetailsOutput = { data: TrackDetailsResource }
 export type GetTrackListOutput = { data: Track[] }
 
 const PAGE_SIZE = (value?: number) => value !== undefined ? `?pageSize=${value}` : '';
-const TRACKS_URL = `${API_URL}/playlists/tracks`;
+const TRACKS_URL = `${API_URL}playlists/tracks`;
 const LIMITED_TRACKS_URL = `${TRACKS_URL}${PAGE_SIZE(5)}`; // 5 tracks per page
 const headers: HeadersInit = API_KEY ? {'api-key': API_KEY} : {};
 export async function getTracks(): Promise<GetTrackListOutput> {
