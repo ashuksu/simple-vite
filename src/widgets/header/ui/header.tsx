@@ -15,12 +15,12 @@ export const Header = ({renderAccountBar}: Props) => {
         )}>
             <div className={styles.container}>
                 <div className={cx(
-                    'container flex items-center py-3 text-white',
+                    'container flex items-center justify-between gap-5 py-3 text-white',
                     styles.nav
                 )}>
                     <Nav/>
+                    {renderAccountBar()}
                 </div>
-                <div hidden>{renderAccountBar()}</div>
             </div>
         </header>
     )

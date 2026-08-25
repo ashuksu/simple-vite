@@ -4,12 +4,13 @@ import {Header} from "../../widgets/header/ui/header.tsx";
 import {Footer} from "../../widgets/footer/ui/footer.tsx";
 import styles from "./root-layout.module.css"
 import {cx} from "tailwind-variants";
+import {LoginButton} from "../../features/auth/ui/login-button.tsx";
 
 export function RootLayout() {
     return (
         <>
             <HeadContent/>
-            <Header renderAccountBar={() => <>Account</>}/>
+            <Header renderAccountBar={() => <LoginButton/>}/>
             <main className="flex flex-col flex-1 gap-3 py-5">
                 <Outlet/>
             </main>
