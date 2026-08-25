@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {getTrack, type TrackDetailsResource} from "../../dal/api.ts";
+import {getTrack, type TrackDetailsResource} from "../../../shared/api/base.ts";
 
 export function useTrackDetails(trackId: string | null) {
     const [trackDetails, seTrackDetails] = useState<TrackDetailsResource | null>(null);

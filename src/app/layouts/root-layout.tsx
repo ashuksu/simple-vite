@@ -1,7 +1,7 @@
 import {HeadContent, Outlet} from "@tanstack/react-router";
 import {TanStackRouterDevtools} from "@tanstack/react-router-devtools";
-import {Header} from "../../shared/ui/header.tsx";
-import {Footer} from "../../shared/ui/footer.tsx";
+import {Header} from "../../widgets/header/ui/header.tsx";
+import {Footer} from "../../widgets/footer/ui/footer.tsx";
 import styles from "./root-layout.module.css"
 import {cx} from "tailwind-variants";
 

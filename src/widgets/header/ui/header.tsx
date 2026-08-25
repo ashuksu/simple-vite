@@ -1,4 +1,4 @@
-import {Nav} from "./nav.tsx";
+import {Nav} from "../../../shared/ui/nav.tsx";
 import type {ReactNode} from 'react'
 import styles from './header.module.css'
 import {cx} from "tailwind-variants";

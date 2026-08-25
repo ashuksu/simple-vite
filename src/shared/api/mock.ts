@@ -1,4 +1,4 @@
-import type {GetTrackDetailsOutput, GetTrackListOutput} from "./api";
+import type {GetTrackDetailsOutput, GetTrackListOutput} from "./base.ts";
 
 export function getTrack(): Promise<GetTrackDetailsOutput> {
     return Promise.resolve({

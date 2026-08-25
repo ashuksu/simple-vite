@@ -1,6 +1,6 @@
-import {Main} from "../shared/ui/music-fun/Main.tsx";
-import SidebarMenu from "../shared/ui/music-fun/SidebarMenu.tsx";
-import {useTrackSelection} from "../bll/music-fun/useTrackSelection.tsx";
+import {MainSection} from "../widgets/music-fun/ui/main-section.tsx";
+import SidebarMenu from "../widgets/music-fun/ui/sidebar-menu.tsx";
+import {useTrackSelection} from "../features/select-track/model/use-track-selection.tsx";
 
 export function MusicFunPage() {
     const {trackId, setTrackId} = useTrackSelection();
@@ -8,7 +8,7 @@ export function MusicFunPage() {
 
     return (
         <div className="container flex gap-3">
-            <Main
+            <MainSection
                 trackId={trackId}
                 onTrackSelect={handleTrackSelect}
             />

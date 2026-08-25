@@ -1,12 +1,12 @@
-import {Title} from "../elements/Title.tsx";
-import {TrackList} from "./TrackList.tsx";
+import {Title} from "../../../shared/ui/title.tsx";
+import {TrackList} from "../../track-list/ui/track-list.tsx";
 
 interface MainProps {
     trackId: string | null;
     onTrackSelect: (id: string | null) => void;
 }
 
-export function Main({trackId, onTrackSelect}: MainProps) {
+export function MainSection({trackId, onTrackSelect}: MainProps) {
     return (
         <section className="section w-1/2">
             <Title title='Track List' className='text-myPurpur/80'/>

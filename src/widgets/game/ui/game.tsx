@@ -1,8 +1,8 @@
-import {Counter} from "./Counter.tsx";
-import {Elephant} from "./Elephant.tsx";
-import {useGame} from "../../../bll/game/useGame.tsx";
+import {Counter} from "../../../features/feed-elephant/ui/counter.tsx";
+import {Elephant} from "../../../entities/elephant/ui/elephant.tsx";
+import {useGame} from "../model/use-game.tsx";
 import {cx} from "tailwind-variants";
-import style from "./Game.module.css"
+import style from "./game.module.css"
 
 export function Game() {
     const {active, count, setCount, handleReset, handleFinish} = useGame()
