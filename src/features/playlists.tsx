@@ -5,7 +5,15 @@ import {cx} from "tailwind-variants";
 export const Playlists = () => {
     const query = useQuery({
         queryKey: ['playlists'],
-        queryFn: () => client.GET('/playlists')
+        queryFn: async () => {
+            const response = await client.GET('/playlists' as unknown as '/playlists')
+
+            if (response.error) {
+                throw (response as unknown as { error: Error }).error;
+            }
+
+            return response.data
+        }
     })
 
     if (query.isPending) {
@@ -19,7 +27,7 @@ export const Playlists = () => {
                 query.isFetching && 'bg-blue-400'
             )}/>
             <ul className="pt-3">
-                {query.data?.data?.data.map((playlist) => {
+                {query.data?.data.map((playlist) => {
                     return <li key={playlist.id}>{playlist.attributes.title}</li>
                 })}
             </ul>
