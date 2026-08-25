@@ -7,11 +7,11 @@ import {routeTree} from '../../routeTree.gen.ts'
 const queryClient = new QueryClient({
     defaultOptions: {
         queries: {
-            staleTime: Infinity,
-            refetchOnMount: false,
+            staleTime: 5 * 1000, // 5 seconds
+            refetchOnMount: true,
             refetchOnWindowFocus: false,
-            refetchOnReconnect: false,
-            gcTime: 5 * 60 * 1000, // 5 minutes
+            refetchOnReconnect: true,
+            gcTime: 5 * 1000, // 5 seconds
         }
     }
 })
