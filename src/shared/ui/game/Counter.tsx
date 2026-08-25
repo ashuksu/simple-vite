@@ -1,4 +1,4 @@
-import {type Props, useCounter} from "../../bll/game/useCounter";
+import {type Props, useCounter} from "../../../bll/game/useCounter.tsx";
 
 
 export function Counter(props: Props) {

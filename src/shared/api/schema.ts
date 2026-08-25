@@ -605,7 +605,9 @@ export interface paths {
         trace?: never;
     };
 }
+
 export type webhooks = Record<string, never>;
+
 export interface components {
     schemas: {
         UserRef: {
@@ -1296,6 +1298,7 @@ export interface components {
     headers: never;
     pathItems: never;
 }
+
 export type SchemaUserRef = components['schemas']['UserRef'];
 export type SchemaImageSizeType = components['schemas']['ImageSizeType'];
 export type SchemaImageVariant = components['schemas']['ImageVariant'];
@@ -1372,6 +1375,7 @@ export type SchemaGetTagOutput = components['schemas']['GetTagOutput'];
 export type SchemaGetTagsOutput = components['schemas']['GetTagsOutput'];
 export type SchemaBinaryFile = components['schemas']['BinaryFile'];
 export type $defs = Record<string, never>;
+
 export interface operations {
     PlaylistsController_getMyPlaylists: {
         parameters: {

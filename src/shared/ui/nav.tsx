@@ -5,12 +5,22 @@ export function Nav() {
     const className = '[&.active]:text-amber-500 font-bold transition'
 
     return (
-        <nav className="flex gap-3">
+        <nav className="flex gap-6">
             <Link
                 to="/"
                 className={className}
                 activeProps={{className: cx('text-green-400 font-normal')}}>
-                Home
+                Play list
+            </Link>
+            <Link
+                to="/my-playlist-page"
+                className={className}>
+                My Playlist
+            </Link>
+            <Link
+                to="/oauth/callback"
+                className={className}>
+                OAuth2 Callback
             </Link>
             <Link
                 to="/about"

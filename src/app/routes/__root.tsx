@@ -1,6 +1,6 @@
 import {createRootRoute} from '@tanstack/react-router'
-import {RootLayout} from "../../ui/layouts/RootLayout.tsx";
-import {NotFoundPage} from "../../ui/pages/NotFoundPage.tsx";
+import {RootLayout} from "../layouts/root-layout.tsx";
+import {NotFoundPage} from "../../pages/not-found-page.tsx";
 
 export const Route = createRootRoute({
     component: RootLayout,

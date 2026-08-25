@@ -1,6 +1,6 @@
-import {ConditionElephant} from "./ConditionElephant";
-import {ButtonFood} from "./ButtonFood";
-import {type Props, useElephant} from "../../bll/game/useElephant";
+import {ConditionElephant} from "./ConditionElephant.tsx";
+import {ButtonFood} from "./ButtonFood.tsx";
+import {type Props, useElephant} from "../../../bll/game/useElephant.tsx";
 import {cx} from "tailwind-variants";
 
 export function Elephant(props: Props) {

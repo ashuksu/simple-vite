@@ -1,5 +1,5 @@
 import {TrackItem} from "./TrackItem.tsx";
-import {useTracks} from "../../bll/music-fun/useTracks.tsx";
+import {useTracks} from "../../../bll/music-fun/useTracks.tsx";
 import {cx} from "tailwind-variants";
 
 interface Props {

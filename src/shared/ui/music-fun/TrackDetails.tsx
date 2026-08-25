@@ -1,4 +1,4 @@
-import {useTrackDetails} from "../../bll/music-fun/UseTrackDetails.tsx";
+import {useTrackDetails} from "../../../bll/music-fun/UseTrackDetails.tsx";
 
 interface Props {
     trackId: string | null;

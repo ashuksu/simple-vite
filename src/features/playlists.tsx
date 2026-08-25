@@ -1,17 +1,7 @@
-import {client} from "../../shared/api/client.ts";
 import {useQuery} from "@tanstack/react-query";
+import {client} from "../shared/api/client.ts";
 
-export function AboutPage() {
-    return (
-        <div className="container">
-            Hello from About!
-            <hr/><br/>
-            <Playlists/>
-        </div>
-    )
-}
-
-const Playlists = () => {
+export const Playlists = () => {
     const query = useQuery({
         queryKey: ['playlists'],
         queryFn: () => client.GET('/playlists')

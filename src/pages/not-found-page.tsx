@@ -1,4 +1,4 @@
-import {Title} from "../elements/Title.tsx";
+import {Title} from "../shared/ui/elements/Title.tsx";
 import {Link} from "@tanstack/react-router";
 
 export function NotFoundPage() {

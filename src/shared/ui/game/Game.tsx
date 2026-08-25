@@ -1,6 +1,6 @@
-import {Counter} from "./Counter";
-import {Elephant} from "./Elephant";
-import {useGame} from "../../bll/game/useGame";
+import {Counter} from "./Counter.tsx";
+import {Elephant} from "./Elephant.tsx";
+import {useGame} from "../../../bll/game/useGame.tsx";
 import {cx} from "tailwind-variants";
 import style from "./Game.module.css"
 

@@ -1,5 +1,5 @@
 import {createFileRoute} from '@tanstack/react-router'
-import {MusicFunPage} from "../../ui/pages/MusicFunPage.tsx";
+import {MusicFunPage} from "../../pages/music-fun-page.tsx";
 
 export const Route = createFileRoute('/music-fun')({
     head: () => ({

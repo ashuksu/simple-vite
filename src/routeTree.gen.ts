@@ -8,12 +8,14 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as SplatRouteImport } from './routes/$'
-import { Route as R404RouteImport } from './routes/404'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as MusicFunRouteImport } from './routes/music-fun'
+import { Route as rootRouteImport } from './app/routes/__root'
+import { Route as IndexRouteImport } from './app/routes/index'
+import { Route as SplatRouteImport } from './app/routes/$'
+import { Route as R404RouteImport } from './app/routes/404'
+import { Route as AboutRouteImport } from './app/routes/about'
+import { Route as MusicFunRouteImport } from './app/routes/music-fun'
+import { Route as MyPlaylistPageRouteImport } from './app/routes/my-playlist-page'
+import { Route as OauthCallbackRouteImport } from './app/routes/oauth/callback'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +42,16 @@ const MusicFunRoute = MusicFunRouteImport.update({
   path: '/music-fun',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MyPlaylistPageRoute = MyPlaylistPageRouteImport.update({
+  id: '/my-playlist-page',
+  path: '/my-playlist-page',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OauthCallbackRoute = OauthCallbackRouteImport.update({
+  id: '/oauth/callback',
+  path: '/oauth/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +59,8 @@ export interface FileRoutesByFullPath {
   '/404': typeof R404Route
   '/about': typeof AboutRoute
   '/music-fun': typeof MusicFunRoute
+  '/my-playlist-page': typeof MyPlaylistPageRoute
+  '/oauth/callback': typeof OauthCallbackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +68,8 @@ export interface FileRoutesByTo {
   '/404': typeof R404Route
   '/about': typeof AboutRoute
   '/music-fun': typeof MusicFunRoute
+  '/my-playlist-page': typeof MyPlaylistPageRoute
+  '/oauth/callback': typeof OauthCallbackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +78,37 @@ export interface FileRoutesById {
   '/404': typeof R404Route
   '/about': typeof AboutRoute
   '/music-fun': typeof MusicFunRoute
+  '/my-playlist-page': typeof MyPlaylistPageRoute
+  '/oauth/callback': typeof OauthCallbackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$' | '/404' | '/about' | '/music-fun'
+  fullPaths:
+    | '/'
+    | '/$'
+    | '/404'
+    | '/about'
+    | '/music-fun'
+    | '/my-playlist-page'
+    | '/oauth/callback'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$' | '/404' | '/about' | '/music-fun'
-  id: '__root__' | '/' | '/$' | '/404' | '/about' | '/music-fun'
+  to:
+    | '/'
+    | '/$'
+    | '/404'
+    | '/about'
+    | '/music-fun'
+    | '/my-playlist-page'
+    | '/oauth/callback'
+  id:
+    | '__root__'
+    | '/'
+    | '/$'
+    | '/404'
+    | '/about'
+    | '/music-fun'
+    | '/my-playlist-page'
+    | '/oauth/callback'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +117,8 @@ export interface RootRouteChildren {
   R404Route: typeof R404Route
   AboutRoute: typeof AboutRoute
   MusicFunRoute: typeof MusicFunRoute
+  MyPlaylistPageRoute: typeof MyPlaylistPageRoute
+  OauthCallbackRoute: typeof OauthCallbackRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +158,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MusicFunRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/my-playlist-page': {
+      id: '/my-playlist-page'
+      path: '/my-playlist-page'
+      fullPath: '/my-playlist-page'
+      preLoaderRoute: typeof MyPlaylistPageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/oauth/callback': {
+      id: '/oauth/callback'
+      path: '/oauth/callback'
+      fullPath: '/oauth/callback'
+      preLoaderRoute: typeof OauthCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +181,8 @@ const rootRouteChildren: RootRouteChildren = {
   R404Route: R404Route,
   AboutRoute: AboutRoute,
   MusicFunRoute: MusicFunRoute,
+  MyPlaylistPageRoute: MyPlaylistPageRoute,
+  OauthCallbackRoute: OauthCallbackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

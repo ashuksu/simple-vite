@@ -1,12 +1,12 @@
 import {createFileRoute} from '@tanstack/react-router'
-import {MainPage} from "../../ui/pages/MainPage.tsx";
+import {PlaylistPage} from "../../pages/playlist-page.tsx";
 
 export const Route = createFileRoute('/')({
     head: () => ({
         meta: [{
-            title: 'Main Page',
+            title: 'Playlist Page',
         }]
     }),
-    component: MainPage,
+    component: PlaylistPage,
 })
 
