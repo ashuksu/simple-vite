@@ -4,13 +4,13 @@ import {Pagination} from "../widgets/pagination/ui/pagination.tsx";
 import {useState} from "react";
 
 export const Playlists = () => {
-    const [page, setPage] = useState(1)
-    const [search, setSearch] = useState('')
+    const [page, setPage] = useState(1);
+    const [search, setSearch] = useState('');
 
     const query = useQuery({
         queryKey: ['playlists', {page, search}],
         queryFn: async ({signal}) => {
-            const response = await client.GET('/playlists', {
+            const {data, error} = await client.GET('/playlists', {
                 params: {
                     query: {
                         pageNumber: page,
@@ -20,27 +20,33 @@ export const Playlists = () => {
                 signal //request interruption
             });
 
-            if (response.error) {
-                throw (response as unknown as { error: Error }).error;
+            if (error) {
+                throw error;
+                // console.warn('Error playlists: ', error);
+                // return null;
             }
 
-            return response.data
+            return data;
         },
         placeholderData: keepPreviousData
-    })
+    });
 
-    if (query.isPending) return <div>Loading...</div>
-    if (query.isError) return <div>Error: {JSON.stringify(query.error.message)}</div>
+    if (query.isPending) return <div>Loading...</div>;
+    if (query.isError || !query.data) return <div>Error: {JSON.stringify(query.error?.message)}</div>;
 
     return (
         <>
             <div>
                 <input
                     value={search}
-                    onChange={(e) => setSearch(e.target.value)}
+                    onChange={(e) => {
+                        setSearch(e.target.value);
+                        setPage(1);
+                    }}
                     type="text"
                     placeholder="Search..."
-                    className="border border-gray-300 rounded px-2 py-1"/>
+                    className="border border-gray-300 rounded px-2 py-1"
+                />
             </div>
             <Pagination
                 pagesCount={query.data.meta.pagesCount}
@@ -49,9 +55,9 @@ export const Playlists = () => {
                 isFetching={query.isFetching}
             />
             <ul className="pt-3">
-                {query.data.data.map((playlist) => {
-                    return <li key={playlist.id}>{playlist.attributes.title}</li>
-                })}
+                {query.data.data.map((playlist) => (
+                    <li key={playlist.id}>{playlist.attributes.title}</li>
+                ))}
             </ul>
         </>
     )

@@ -1,27 +1,32 @@
 import {useMutation} from "@tanstack/react-query"
 import {client} from "../../../shared/api/client.ts";
-import {API_URL} from "../../../config.ts";
+import {API_URL, OAUTH_REDIRECT_URI} from "../../../config.ts";
 
 export function LoginButton() {
-    const callbackUrl = 'http://localhost:5173/oauth/callback';
-
     const mutation = useMutation({
         mutationFn: async ({code}: { code: string }) => {
-            const response = await client.POST('/auth/login', {
+            const {data, error} = await client.POST('/auth/login', {
                 body: {
                     code: code,
-                    redirectUri: callbackUrl,
+                    redirectUri: OAUTH_REDIRECT_URI,
                     rememberMe: true,
                     accessTokenTTL: '1d'
                 }
             })
 
-            if (response.error) {
-                const errorMessage = (response.error as unknown as { message: string }).message || 'Login failed'
+            if (error) {
+                const errorMessage = (error as unknown as { message?: string })?.message || 'Login failed'
                 throw new Error(errorMessage)
+                // console.warn('Error mutation: ', errorMessage);
             }
 
-            return response.data;
+            return data;
+        },
+        onSuccess: (data) => {
+            if (!data) return
+
+            localStorage.setItem('oauth-refresh-token', data.refreshToken)
+            localStorage.setItem('oauth-access-token', data.accessToken)
         }
     })
 
@@ -29,7 +34,7 @@ export function LoginButton() {
         window.addEventListener('message', handleOauthMessage, {once: true})
 
         window.open(
-            `${API_URL}auth/oauth-redirect?callbackUrl=${callbackUrl}`,
+            `${API_URL}auth/oauth-redirect?callbackUrl=${OAUTH_REDIRECT_URI}`,
             'api-hub-oauth2',
             'width=500,height=600'
         )

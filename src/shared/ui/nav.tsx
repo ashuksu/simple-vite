@@ -2,7 +2,7 @@ import {Link} from "@tanstack/react-router";
 import {cx} from "tailwind-variants";
 
 export function Nav() {
-    const className = '[&.active]:text-amber-500 [&.active]:cursor-default font-bold hover:text-amber-300 transition'
+    const className = '[&.active]:text-amber-500 [&.active]:cursor-default font-bold hover:text-amber-300 transition text-center flex items-center justify-center px-4 py-2'
 
     return (
         <nav className="flex gap-6">
