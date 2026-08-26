@@ -1,21 +1,16 @@
-import {useQuery} from "@tanstack/react-query";
 import {LoginButton} from "./login-button.tsx";
-import {client} from "../../../shared/api/client.ts";
+import {CurrentUser} from "./current-user.tsx";
+import {useMeQuery} from "../model/use-me-query.ts";
 
 export const AccountBar = () => {
-    const query = useQuery({
-        queryKey: ['auth', 'me'],
-        queryFn: async () => {
-            const {data} = await client.GET('/auth/me')
-            return data ?? null
-        }
-    })
+    const query = useMeQuery()
+
+    if (query.isPending) <></>
 
     return (
         <div>
             {!query.data && <LoginButton/>}
-            {/*!query.data?.login*/}
-            {/*{query.data && <CurrentUser/>}*/}
+            {query.data && <CurrentUser/>}
         </div>
     )
 }
