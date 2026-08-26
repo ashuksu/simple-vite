@@ -5,7 +5,9 @@ import {useMeQuery} from "../model/use-me-query.ts";
 export const AccountBar = () => {
     const query = useMeQuery()
 
-    if (query.isPending) <></>
+    if (query.isPending) {
+        return <></>
+    }
 
     return (
         <div>
