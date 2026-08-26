@@ -1,6 +1,6 @@
 import {useLogoutMutation} from "../model/use-logout-mutation.tsx";
 
-export function LogoutButton() {
+export const LogoutButton = () => {
     const mutation = useLogoutMutation()
 
     return (

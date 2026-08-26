@@ -1,7 +1,7 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query"
 import {client} from "../../../shared/api/client.ts";
 
-export function useLogoutMutation() {
+export const useLogoutMutation = () => {
     const queryClient = useQueryClient()
 
     const mutation = useMutation({
@@ -20,7 +20,7 @@ export function useLogoutMutation() {
             queryClient.resetQueries({
                 queryKey: ['auth', 'me']
             })
-        }
+        },
     })
 
     return mutation;

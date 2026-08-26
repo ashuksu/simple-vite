@@ -2,7 +2,7 @@ import {useMutation, useQueryClient} from "@tanstack/react-query"
 import {client} from "../../../shared/api/client.ts";
 import {OAUTH_REDIRECT_URI} from "../../../config.ts";
 
-export function useLoginMutation() {
+export const useLoginMutation = () => {
     const queryClient = useQueryClient()
 
     const mutation = useMutation({
@@ -12,7 +12,7 @@ export function useLoginMutation() {
                     code: code,
                     redirectUri: OAUTH_REDIRECT_URI,
                     rememberMe: true,
-                    accessTokenTTL: '1d'
+                    accessTokenTTL: '60m'
                 }
             })
 
@@ -25,8 +25,6 @@ export function useLoginMutation() {
             return data;
         },
         onSuccess: (data) => {
-            if (!data) return
-
             localStorage.setItem('oauth-refresh-token', data.refreshToken)
             localStorage.setItem('oauth-access-token', data.accessToken)
             queryClient.invalidateQueries({

@@ -1,5 +1,5 @@
 import createClient, {type Middleware} from "openapi-fetch";
-import type {paths} from "./schema.ts";
+import type {paths} from "../lib/schema.ts";
 import {API_KEY, API_URL} from "../../config.ts";
 
 const headers: HeadersInit = API_KEY ? {'api-key': API_KEY} : {};
@@ -24,7 +24,7 @@ function makeRefreshToken() {
                 }),
             })
 
-            if (!response) {
+            if (!response.ok) {
                 localStorage.removeItem('oauth-refresh-token')
                 localStorage.removeItem('oauth-access-token')
                 throw new Error('Refresh token failed');
@@ -56,12 +56,12 @@ const authMiddleware: Middleware = {
 
         return request;
     },
-    async onResponse({response}) {
+    async onResponse({request, response}) {
         if (response.ok) return response;
 
         if (!response.ok && response.status !== 401) {
-            throw new Error(`${response.url}: ${response.status} ${response.statusText}`)
-            // console.warn(`[API Warning] ${response.status} ${response.statusText} at ${response.url}`);
+            const errorBody = await response.json()
+            throw errorBody
         }
 
         try {
@@ -69,9 +69,14 @@ const authMiddleware: Middleware = {
 
             // @ts-expect-error ignore it
             const originalRequest: Request = request._retryRequest;
-            const retryRequest = new Request(originalRequest, {headers: new Headers(originalRequest.headers)})
-            retryRequest.headers.set("Authorization", "Bearer " + localStorage.getItem('oauth-access-token'));
-            return await fetch(retryRequest);
+            const retryRequest = new Request(originalRequest, {
+                headers: new Headers(originalRequest.headers)
+            })
+            retryRequest.headers.set(
+                "Authorization",
+                "Bearer " + localStorage.getItem('oauth-access-token')
+            );
+            return fetch(retryRequest);
         } catch {
             return response;
         }

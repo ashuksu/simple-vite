@@ -8,5 +8,5 @@ export const useMeQuery = () =>
             const {data} = await client.GET('/auth/me')
             return data ?? null
         },
-        retry: false
+        retry: false,
     })

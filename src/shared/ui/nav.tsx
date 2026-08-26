@@ -13,16 +13,6 @@ export function Nav() {
                 Play list
             </Link>
             <Link
-                to="/my-playlist-page"
-                className={className}>
-                My Playlist
-            </Link>
-            <Link
-                to="/oauth/callback"
-                className={className}>
-                OAuth2 Callback
-            </Link>
-            <Link
                 to="/about"
                 className={className}>
                 About

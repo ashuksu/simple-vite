@@ -1,7 +1,7 @@
 import {API_URL, OAUTH_REDIRECT_URI} from "../../../config.ts";
 import {useLoginMutation} from "../model/use-login-mutation.tsx";
 
-export function LoginButton() {
+export const LoginButton = () => {
     const mutation = useLoginMutation()
 
     const handleLogin = () => {
@@ -9,7 +9,7 @@ export function LoginButton() {
 
         window.open(
             `${API_URL}auth/oauth-redirect?callbackUrl=${OAUTH_REDIRECT_URI}`,
-            'api-hub-oauth2',
+            'apihub-oauth2',
             'width=500,height=600'
         )
     }
