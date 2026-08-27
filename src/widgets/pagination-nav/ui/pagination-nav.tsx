@@ -1,5 +1,5 @@
-import styles from './pagination-nav.module.css'
 import {getPaginationPages} from "../../pagination/mode/get-pagination-pages.ts";
+import {tv} from "tailwind-variants";
 
 type Props = {
     current: number
@@ -9,28 +9,45 @@ type Props = {
 
 const SIBLING_COUNT = 1
 
+const classNameButton = tv({
+    base: [
+        'button button--sm min-w-8 h-8 px-[5px]'
+    ],
+    variants: {
+        isCurrent: {
+            true: 'button--primary opacity',
+            false: 'button--ternary'
+        }
+    }
+});
+
+
 export const PaginationNav = ({current, pagesCount, onChange}: Props) => {
     const pages = getPaginationPages(current, pagesCount, SIBLING_COUNT)
 
     return (
-        <div className={styles.pagination}>
-            {pages.map((item: number | '...', idx: number) =>
-                item === '...' ? (
-                    <span className={styles.ellipsis} key={`ellipsis-${idx}`}>
+        <div className='flex items-center justify-center gap-2'>
+            {pages.map((item: number | '...', idx: number) => {
+                const isCurrent = item === current
+
+                return item === '...' ? (
+                    <span
+                        className='px-0.5 pt-3 select-none font-bold tracking-[3px]'
+                        key={`ellipsis-${idx}`}>
                         ...
                     </span>
                 ) : (
                     <button
                         key={item}
-                        className={item === current ? `${styles.pageButton} ${styles.pageButtonActive}` : styles.pageButton}
-                        onClick={() => item !== current && onChange(Number(item))}
-                        disabled={item === current}
+                        className={classNameButton({isCurrent})}
+                        onClick={() => !isCurrent && onChange(Number(item))}
+                        disabled={isCurrent}
                         type="button"
                     >
                         {item}
                     </button>
-                ),
-            )}
+                )
+            })}
         </div>
     )
 }

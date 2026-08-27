@@ -1,6 +1,5 @@
 import {cx} from "tailwind-variants";
 import {PaginationNav} from "../../pagination-nav/ui/pagination-nav.tsx";
-import styles from "./pagination.module.css";
 
 type Props = {
     current: number,
@@ -11,7 +10,7 @@ type Props = {
 
 export const Pagination = ({current, pagesCount, changePageNumber, isFetching}: Props) => {
     return (
-        <div className={styles.container}>
+        <div className='flex items-center justify-center max-w-md gap-3'>
             <PaginationNav
                 current={current}
                 pagesCount={pagesCount}

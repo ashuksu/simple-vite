@@ -40,7 +40,7 @@ export const Playlists = ({userId}: Props) => {
     if (query.isError || !query.data) return <div>Error: {JSON.stringify(query.error?.message)}</div>;
 
     return (
-        <>
+        <div className='flex flex-col gap-3 max-w-md'>
             <input
                 value={search}
                 onChange={(e) => {
@@ -49,7 +49,7 @@ export const Playlists = ({userId}: Props) => {
                 }}
                 type="text"
                 placeholder="Search..."
-                className="input max-w-md mb-3"
+                className="input max-w-md"
             />
             <Pagination
                 pagesCount={query.data.meta.pagesCount}
@@ -57,7 +57,7 @@ export const Playlists = ({userId}: Props) => {
                 changePageNumber={setPage}
                 isFetching={query.isFetching}
             />
-            <ul className="pt-3">
+            <ul className="flex flex-col gap-2">
                 {query.data.data.map((playlist) => (
                     <li
                         className='flex items-center gap-1'
@@ -66,6 +66,6 @@ export const Playlists = ({userId}: Props) => {
                     </li>
                 ))}
             </ul>
-        </>
+        </div>
     )
 }
