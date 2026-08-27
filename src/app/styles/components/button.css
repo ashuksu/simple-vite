@@ -1,0 +1,43 @@
+@utility button {
+    @apply flex items-center justify-center shrink-0 self-center bg-green-300 text-gray-800 font-black cursor-pointer transition px-2 py-1 gap-2 rounded relative;
+
+    &:hover {
+        @apply bg-green-400 text-black;
+    }
+
+    &:disabled {
+        @apply opacity-50 cursor-not-allowed pointer-events-none;
+    }
+}
+
+@utility button--primary {
+    @apply bg-blue-300;
+
+    &:hover {
+        @apply bg-blue-400;
+    }
+}
+
+@utility button--secondary {
+    @apply bg-amber-500 ;
+
+    &:hover {
+        @apply bg-amber-600;
+    }
+}
+
+@utility button--accent {
+    @apply bg-red-400;
+
+    &:hover {
+        @apply bg-red-500;
+    }
+}
+
+@utility button--sm {
+    @apply px-2 py-0.5 text-sm gap-1;
+}
+
+@utility button--md {
+    @apply px-3 py-1.5 text-base;
+}
