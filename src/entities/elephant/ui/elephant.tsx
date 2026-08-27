@@ -28,8 +28,7 @@ export function Elephant(props: Props) {
                 </div>
             </div>
             <button
-                className={`flex items-center justify-center w-max gap-2 py-2.5 px-4
-                    bg-amber-500 rounded-md text-black relative z-5 cursor-pointer`}
+                className='button button--secondary button--md relative z-5'
                 onClick={handleClick}>
                 Let's play again?
             </button>
@@ -44,12 +43,11 @@ export function Elephant(props: Props) {
                         </p>
                         <div className="flex items-center gap-3 max-w-60">
                             <ButtonFood
-                                className='bg-green-500'
                                 handleFeedJunkFood={handleFeedHealthyFood}
                                 title='Feed the elephant healthy food 🥬🍉🍌'/>
                             <ButtonFood
                                 handleFeedJunkFood={handleFeedJunkFood}
-                                className='bg-red-500'
+                                className='button--accent'
                                 title='Feed the elephant junk food 🍔🍬🍕'/>
                         </div>
                     </>

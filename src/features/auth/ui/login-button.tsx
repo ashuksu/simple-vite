@@ -1,3 +1,4 @@
+import {cn} from "tailwind-variants";
 import {API_URL, OAUTH_REDIRECT_URI} from "../../../config.ts";
 import {useLoginMutation} from "../model/use-login-mutation.tsx";
 
@@ -34,7 +35,7 @@ export const LoginButton = () => {
 
     return (
         <button
-            className="flex items-center justify-center bg-blue-200 hover:bg-blue-300 text-gray-800 font-black hover:text-black cursor-pointer transition px-2 py-1 rounded"
+            className={cn('button button--primary')}
             onClick={handleLogin}>
             Login with API-HUB
         </button>

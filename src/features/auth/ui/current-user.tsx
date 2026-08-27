@@ -1,5 +1,4 @@
 import {Link} from '@tanstack/react-router'
-import styles from './account-bar.module.css'
 import {useMeQuery} from "../model/use-me-query.ts";
 import {LogoutButton} from "./logout-button.tsx";
 
@@ -9,7 +8,7 @@ export const CurrentUser = () => {
     if (!query.data) return <span>...</span>
 
     return (
-        <div className={styles.meInfoContainer}>
+        <div className='flex items-center gap-2'>
             <Link
                 to="/my-playlist-page"
                 activeOptions={{exact: true}}

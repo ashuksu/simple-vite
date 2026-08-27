@@ -8,11 +8,10 @@ export function Counter(props: Props) {
         <>
             <h2 className='mt-0'>Click the button {endCount} times to see the elephant</h2>
             <button
-                className={`flex items-center justify-center w-max gap-2 py-2.5 px-4
-                    bg-amber-500 rounded-md text-black cursor-pointer`}
+                className='button button--secondary button--md'
                 onClick={handleClick}>
-                Counter:
-                <span className='font-bold'>{props.count}</span>
+                <span className='font-bold'>Counter: </span>
+                {props.count}
             </button>
         </>
 
