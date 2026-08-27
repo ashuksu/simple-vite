@@ -40,18 +40,16 @@ export const Playlists = ({userId}: Props) => {
 
     return (
         <>
-            <div>
-                <input
-                    value={search}
-                    onChange={(e) => {
-                        setSearch(e.target.value);
-                        setPage(1);
-                    }}
-                    type="text"
-                    placeholder="Search..."
-                    className="border border-gray-300 rounded px-2 py-1"
-                />
-            </div>
+            <input
+                value={search}
+                onChange={(e) => {
+                    setSearch(e.target.value);
+                    setPage(1);
+                }}
+                type="text"
+                placeholder="Search..."
+                className="input max-w-md mb-3"
+            />
             <Pagination
                 pagesCount={query.data.meta.pagesCount}
                 current={page} // query.data.meta.page
