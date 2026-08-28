@@ -16,6 +16,8 @@ export default defineConfig(({mode}) => {
             tanstackRouter({
                 target: 'react',
                 autoCodeSplitting: true,
+                routesDirectory: './src/app/routes',
+                generatedRouteTree: './src/routeTree.gen.ts'
             }),
             react(),
             tailwindcss(),
@@ -25,9 +27,9 @@ export default defineConfig(({mode}) => {
 })
 
 /**
-    Generates dist/404.html for GitHub Pages SPA fallback.
-    pathSegmentsToKeep is calculated from basePath, not hardcoded
-*/
+ Generates dist/404.html for GitHub Pages SPA fallback.
+ pathSegmentsToKeep is calculated from basePath, not hardcoded
+ */
 function spaFallback404(basePath: string): Plugin {
     return {
         name: 'spa-fallback-404',
