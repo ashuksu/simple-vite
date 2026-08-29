@@ -6,8 +6,9 @@ import {DeletePlaylist} from "../../../features/playlists/delete-playlist/ui/del
 
 type Props = {
     userId?: string
+    onPlaylistSelected: (playlistId: string) => void
 }
-export const Playlists = ({userId}: Props) => {
+export const Playlists = ({userId, onPlaylistSelected}: Props) => {
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState('');
 
@@ -36,6 +37,10 @@ export const Playlists = ({userId}: Props) => {
         placeholderData: keepPreviousData
     });
 
+    const handlePlaylistSelectedClick = (playlistId: string) => {
+        onPlaylistSelected?.(playlistId);
+    }
+
     if (query.isPending) return <div>Loading...</div>;
     if (query.isError || !query.data) return <div>Error: {JSON.stringify(query.error?.message)}</div>;
 
@@ -60,6 +65,7 @@ export const Playlists = ({userId}: Props) => {
             <ul className="flex flex-col gap-2">
                 {query.data.data.map((playlist) => (
                     <li
+                        onClick={() => handlePlaylistSelectedClick(playlist.id)}
                         className='flex items-center gap-1'
                         key={playlist.id}>
                         {playlist.attributes.title} <DeletePlaylist playlistId={playlist.id}/>

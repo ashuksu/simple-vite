@@ -33,7 +33,13 @@ export const EditPlaylistForm = ({playlistId}: Props) => {
                 },
                 body: {
                     ...data,
-                    tagIds: []
+                    data: {
+                        ...data.data,
+                        attributes: {
+                            ...data.data.attributes,
+                            tagIds: [],
+                        }
+                    }
                 }
             })
 
