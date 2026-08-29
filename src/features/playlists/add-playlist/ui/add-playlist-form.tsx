@@ -52,7 +52,8 @@ export const AddPlaylistForm = () => {
             </label>
             <button
                 className='button button--md w-full'
-                type="submit">Add Playlist
+                type="submit">
+                Add Playlist
             </button>
         </form>
     )

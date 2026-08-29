@@ -2,25 +2,31 @@ import {useMutation, useQuery, useQueryClient} from "@tanstack/react-query"
 import {useForm} from 'react-hook-form'
 import {client} from "../../../../shared/api/client"
 import type {SchemaUpdatePlaylistRequestPayload} from "../../../../shared/lib/schema.ts";
+import {useEffect} from "react";
 
 type Props = {
-    playlistId: string
+    playlistId: string | null
 }
 
 export const EditPlaylistForm = ({playlistId}: Props) => {
-    const {register, handleSubmit} = useForm<SchemaUpdatePlaylistRequestPayload>();
+    const {register, handleSubmit, reset} = useForm<SchemaUpdatePlaylistRequestPayload>();
+
+    useEffect(() => {
+        reset();
+    }, [playlistId, reset]);
 
     const {data, isPending, isError} = useQuery({
         queryKey: ['playlists', playlistId],
         queryFn: async () => {
             const {data} = await client.GET('/playlists/{playlistId}', {
                 params: {
-                    path: {playlistId}
+                    path: {playlistId: playlistId!}
                 }
             })
 
             return data!;
-        }
+        },
+        enabled: !!playlistId,
     })
 
     const queryClient = useQueryClient()
@@ -29,7 +35,7 @@ export const EditPlaylistForm = ({playlistId}: Props) => {
         mutationFn: async (data: SchemaUpdatePlaylistRequestPayload) => {
             const response = await client.PUT('/playlists/{playlistId}', {
                 params: {
-                    path: {playlistId}
+                    path: {playlistId: playlistId!}
                 },
                 body: {
                     ...data,
@@ -45,8 +51,8 @@ export const EditPlaylistForm = ({playlistId}: Props) => {
 
             return response.data;
         },
-        onSuccess: () => {
-            queryClient.invalidateQueries({
+        onSuccess: async () => {
+            await queryClient.invalidateQueries({
                 queryKey: ['playlists'],
                 refetchType: 'all'
             })
@@ -57,13 +63,9 @@ export const EditPlaylistForm = ({playlistId}: Props) => {
         mutate(data)
     }
 
-    if (isPending) {
-        return <div>Loading...</div>
-    }
-
-    if (isError) {
-        return <div>Error loading playlist</div>
-    }
+    if (!playlistId) return <></>;
+    if (isPending) return <div>Loading...</div>;
+    if (isError) return <div>Error loading playlist</div>;
 
     return (
         <form
@@ -76,7 +78,7 @@ export const EditPlaylistForm = ({playlistId}: Props) => {
                 <span>Playlist Name</span>
                 <input
                     {...register('data.attributes.title')}
-                    defaultValue={data.data.attributes.title}
+                    defaultValue={data?.data.attributes.title}
                     className="input"
                     type="text"
                     placeholder="Playlist Name"/>
@@ -92,7 +94,8 @@ export const EditPlaylistForm = ({playlistId}: Props) => {
             </label>
             <button
                 className='button button--md w-full'
-                type="submit">Add Playlist
+                type="submit">
+                Save Playlist
             </button>
         </form>
     )

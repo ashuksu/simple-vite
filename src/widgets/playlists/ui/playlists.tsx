@@ -6,7 +6,7 @@ import {DeletePlaylist} from "../../../features/playlists/delete-playlist/ui/del
 
 type Props = {
     userId?: string
-    onPlaylistSelected: (playlistId: string) => void
+    onPlaylistSelected?: (playlistId: string) => void
 }
 export const Playlists = ({userId, onPlaylistSelected}: Props) => {
     const [page, setPage] = useState(1);

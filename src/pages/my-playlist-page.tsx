@@ -28,7 +28,7 @@ export function MyPlaylistPage() {
             <div className="flex flex-col gap-5">
                 <AddPlaylistForm/>
                 <Playlists userId={data.userId} onPlaylistSelected={setEditingPlayListId}/>
-                {editingPlayListId && <EditPlaylistForm key={editingPlayListId} playlistId={editingPlayListId}/>}
+                <EditPlaylistForm playlistId={editingPlayListId}/>
             </div>
         </div>
     )
