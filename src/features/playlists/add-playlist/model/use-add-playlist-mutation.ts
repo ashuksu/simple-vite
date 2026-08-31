@@ -7,12 +7,26 @@ export const useAddPlaylistMutation = () => {
     const queryClient = useQueryClient()
 
     return useMutation({
-        mutationFn: async (data: SchemaCreatePlaylistRequestPayload) => {
-            const response = await client.POST('/playlists', {
-                body: data
+        mutationFn: async (payload: SchemaCreatePlaylistRequestPayload) => {
+            const {data, error} = await client.POST('/playlists', {
+                body: {
+                    ...payload,
+                    data: {
+                        ...payload.data,
+                        type: 'playlists',
+                        attributes: {
+                            ...payload.data.attributes,
+                            tagIds: [],
+                        }
+                    }
+                }
             })
 
-            return response.data;
+            if (error) {
+                throw error;
+            }
+
+            return data;
         },
         onSuccess: () => {
             queryClient.invalidateQueries({

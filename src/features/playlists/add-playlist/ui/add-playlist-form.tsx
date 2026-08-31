@@ -1,7 +1,8 @@
-import {type Path, useForm} from 'react-hook-form'
+import {useForm} from 'react-hook-form'
 import type {SchemaCreatePlaylistRequestPayload} from "../../../../shared/lib/schema.ts";
 import {useAddPlaylistMutation} from "../model/use-add-playlist-mutation.ts";
-import {isJsonApiErrorDocument, parseJsonApiErrors} from "../../../../shared/util/json-api-error.ts";
+import {type JsonApiErrorDocument} from "../../../../shared/util/json-api-error.ts";
+import {queryErrorHandlerForRHFFactory} from "../../../../shared/ui/util/query-error-handler-for-rhf-factory.ts";
 
 export const AddPlaylistForm = () => {
     const {
@@ -18,21 +19,7 @@ export const AddPlaylistForm = () => {
             await mutateAsync(data)
             reset()
         } catch (error) {
-            if (isJsonApiErrorDocument(error)) {
-                const {fieldErrors, globalErrors} = parseJsonApiErrors(error)
-
-                for (const [field, message] of Object.entries(fieldErrors)) {
-                    const fieldPath = `data.attributes.${field}` as Path<SchemaCreatePlaylistRequestPayload>
-                    setError(fieldPath, {type: 'server', message})
-                }
-
-                if (globalErrors.length > 0) {
-                    setError('root.server', {
-                        type: 'server',
-                        message: globalErrors.join('\n')
-                    })
-                }
-            }
+            queryErrorHandlerForRHFFactory({setError})(error as unknown as JsonApiErrorDocument)
         }
     }
 
@@ -50,8 +37,7 @@ export const AddPlaylistForm = () => {
                         {...register('data.attributes.title')}
                         className="input"
                         type="text"
-                        placeholder="Playlist Name"
-                        required/>
+                        placeholder="Playlist Name"/>
                 </label>
                 {errors.data?.attributes?.title && (
                     <p className="text-red-500 mt-1 wrap-break-word">

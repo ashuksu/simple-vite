@@ -1,0 +1,59 @@
+import type {FieldValues, Path, UseFormSetError} from 'react-hook-form'
+import {toast} from 'react-toastify'
+import {isJsonApiErrorDocument, type JsonApiErrorDocument, parseJsonApiErrors,} from '../../util/json-api-error.ts'
+
+export const queryErrorHandlerForRHFFactory = <T extends FieldValues>({
+                                                                          setError,
+                                                                      }: {
+    setError?: UseFormSetError<T>
+}) => {
+    return (err: JsonApiErrorDocument) => {
+        // 400 от сервера в JSON:API формате
+        if (isJsonApiErrorDocument(err)) {
+            const {fieldErrors, globalErrors} = parseJsonApiErrors(err)
+
+            // полевые ошибки
+            for (const [field, message] of Object.entries(fieldErrors)) {
+                const fieldPath = `data.attributes.${field}` as Path<T>
+                setError?.(fieldPath, {type: 'server', message})
+            }
+
+            // «глобальные» (без pointer)
+            if (globalErrors.length > 0) {
+                const globalMessage = globalErrors.join('\n');
+
+                // ПОКАЗЫВАЕМ TOAST!
+                toast.error(globalMessage);
+
+                setError?.('root.server' as Path<T>, {
+                    type: 'server',
+                    message: globalErrors.join('\n'),
+                })
+            }
+        } else {
+            // Если пришла стандартная или неизвестная ошибка
+            toast.error('An unexpected error occurred');
+        }
+    }
+}
+
+export const mutationGlobalErrorHandler = (
+    error: Error,
+    _: unknown,
+    __: unknown,
+    mutation: unknown
+) => {
+    // @ts-expect-error look at MutationMeta type
+    if (mutation?.meta?.globalErrorHandler === 'off') {
+        return
+    }
+
+    if (isJsonApiErrorDocument(error)) {
+        const {globalErrors} = parseJsonApiErrors(error)
+
+        // «глобальные» (без pointer)
+        if (globalErrors.length > 0) {
+            toast(globalErrors.join('\n'))
+        }
+    }
+}

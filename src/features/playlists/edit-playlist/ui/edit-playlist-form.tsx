@@ -1,9 +1,10 @@
-import {type Path, useForm} from 'react-hook-form';
+import {useForm} from 'react-hook-form';
 import type {SchemaUpdatePlaylistRequestPayload} from "../../../../shared/lib/schema.ts";
 import {useEffect} from "react";
 import {usePlaylistQuery} from "../model/use-playlist-query.ts";
 import {useUpdatePlaylistMutation} from "../model/use-update-playlist-mutation.ts";
-import {isJsonApiErrorDocument, parseJsonApiErrors} from "../../../../shared/util/json-api-error.ts";
+import {type JsonApiErrorDocument} from "../../../../shared/util/json-api-error.ts";
+import {queryErrorHandlerForRHFFactory} from "../../../../shared/ui/util/query-error-handler-for-rhf-factory.ts";
 
 type Props = {
     playlistId: string | null
@@ -45,21 +46,7 @@ export const EditPlaylistForm = ({playlistId, onCancelEditing}: Props) => {
         try {
             await mutateAsync({...formData, playlistId: playlistId!});
         } catch (error) {
-            if (isJsonApiErrorDocument(error)) {
-                const {fieldErrors, globalErrors} = parseJsonApiErrors(error);
-
-                for (const [field, message] of Object.entries(fieldErrors)) {
-                    const fieldPath = `data.attributes.${field}` as Path<SchemaUpdatePlaylistRequestPayload>;
-                    setError(fieldPath, {type: 'server', message});
-                }
-
-                if (globalErrors.length > 0) {
-                    setError('root.server', {
-                        type: 'server',
-                        message: globalErrors.join('\n'),
-                    });
-                }
-            }
+            queryErrorHandlerForRHFFactory({setError})(error as unknown as JsonApiErrorDocument)
         }
     };
 
@@ -82,8 +69,7 @@ export const EditPlaylistForm = ({playlistId, onCancelEditing}: Props) => {
                         defaultValue={data?.data.attributes.title}
                         className="input"
                         type="text"
-                        placeholder="Playlist Name"
-                        required/>
+                        placeholder="Playlist Name"/>
                 </label>
                 {errors.data?.attributes?.title && (
                     <p className="text-red-500 mt-1 wrap-break-word">
@@ -112,7 +98,7 @@ export const EditPlaylistForm = ({playlistId, onCancelEditing}: Props) => {
                     <button
                         className='button button--accent button--md'
                         onClick={onCancelEditing}
-                        type="reset">
+                        type="button">
                         Cancel
                     </button>
                     <button
