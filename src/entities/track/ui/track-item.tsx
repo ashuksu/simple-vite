@@ -1,6 +1,6 @@
+import type {Track} from "../model/types";
 import {tv} from 'tailwind-variants';
 import type {CSSProperties} from "react";
-import type {Track} from "../model/types.ts";
 
 type Props = {
     index: number

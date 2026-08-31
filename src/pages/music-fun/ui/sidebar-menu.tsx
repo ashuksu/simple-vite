@@ -1,6 +1,6 @@
-import {Title} from "../../../shared/ui/title.tsx";
-import TrackDetails from "../../../entities/track/ui/track-details.tsx";
-import {Game} from "../../../widgets/game/ui/game.tsx";
+import {Title} from "../../../shared/ui/title";
+import {TrackDetails} from "../../../entities/track";
+import {Game} from "../../../widgets/game/ui/game";
 
 export default function SidebarMenu({trackId}: { trackId: string | null }) {
     return (

@@ -1,5 +1,4 @@
-import {TrackItem} from "../../../entities/track/ui/track-item.tsx";
-import {useTracks} from "../../../entities/track/model/use-tracks.ts";
+import {TrackItem, useTracks} from "../../../entities/track";
 import {cx} from "tailwind-variants";
 
 interface Props {
