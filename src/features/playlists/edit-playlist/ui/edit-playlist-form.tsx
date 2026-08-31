@@ -17,7 +17,12 @@ export const EditPlaylistForm = ({playlistId, onCancelEditing}: Props) => {
     }, [playlistId, reset]);
 
     const {data, isPending, isError} = usePlaylistQuery(playlistId);
-    const {mutate} = useUpdatePlaylistMutation();
+
+    const {mutate} = useUpdatePlaylistMutation({
+        onSuccess: () => {
+            onCancelEditing();
+        }
+    });
 
     const onSubmit = (data: SchemaUpdatePlaylistRequestPayload) => {
         mutate({...data, playlistId: playlistId!})

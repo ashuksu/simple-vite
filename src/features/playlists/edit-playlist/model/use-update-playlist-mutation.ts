@@ -5,7 +5,7 @@ import {playlistsKeys} from "../../../../shared/api/keys-factories/playlists-key
 
 type MutationVariables = SchemaUpdatePlaylistRequestPayload & { playlistId: string }
 
-export const useUpdatePlaylistMutation = () => {
+export const useUpdatePlaylistMutation = ({onSuccess}: { onSuccess?: () => void }) => {
     const key = playlistsKeys.meList();
     const queryClient = useQueryClient();
 
@@ -31,12 +31,12 @@ export const useUpdatePlaylistMutation = () => {
 
             return response.data;
         },
-        onMutate: async (variables: MutationVariables, context) => {
-            await context.client.cancelQueries({queryKey: playlistsKeys.all})
+        onMutate: async (variables: MutationVariables) => {
+            await queryClient.cancelQueries({queryKey: playlistsKeys.all})
 
-            const previousMyPlatLists = context.client.getQueryData(key)
+            const previousMyPlatLists = queryClient.getQueryData(key)
 
-            context.client.setQueryData(key, (oldData: SchemaGetPlaylistsOutput) => {
+            queryClient.setQueryData(key, (oldData: SchemaGetPlaylistsOutput) => {
                 return {
                     ...oldData,
                     data: oldData.data.map(p => {
@@ -58,11 +58,14 @@ export const useUpdatePlaylistMutation = () => {
 
             return {previousMyPlatLists}
         },
-        onError: (_, __: MutationVariables, onMutateResult, context) => {
-            context.client.setQueryData(
+        onError: (_, __: MutationVariables, context) => {
+            queryClient.setQueryData(
                 key,
-                onMutateResult!.previousMyPlatLists,
+                context!.previousMyPlatLists,
             )
+        },
+        onSuccess: () => {
+            onSuccess?.();
         },
         onSettled: (_, __, variables: MutationVariables) => {
             queryClient.invalidateQueries({
