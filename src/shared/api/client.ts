@@ -1,7 +1,6 @@
 import createClient, {type Middleware} from "openapi-fetch";
-import type {paths} from "../lib/schema.ts";
-import {API_KEY, API_URL} from "../config/api-config.ts";
-import {localStorageKeys} from "../config/localstorage-keys.ts";
+import {API_KEY, API_URL, localStorageKeys} from "../config";
+import type {paths} from "../lib";
 
 const headers: HeadersInit = API_KEY ? {'api-key': API_KEY} : {};
 

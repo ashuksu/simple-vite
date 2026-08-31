@@ -1,12 +1,12 @@
 import {useForm} from 'react-hook-form';
-import type {SchemaUpdatePlaylistRequestPayload} from "../../../../shared/lib/schema.ts";
 import {useEffect} from "react";
 import {usePlaylistQuery} from "../model/use-playlist-query.ts";
 import {useUpdatePlaylistMutation} from "../model/use-update-playlist-mutation.ts";
-import {type JsonApiErrorDocument} from "../../../../shared/lib/error-handlers/json-api-error.ts";
 import {
-    queryErrorHandlerForRHFFactory
-} from "../../../../shared/lib/error-handlers/query-error-handler-for-rhf-factory.ts";
+    type JsonApiErrorDocument,
+    queryErrorHandlerForRHFFactory,
+    type SchemaUpdatePlaylistRequestPayload
+} from "../../../../shared/lib";
 
 type Props = {
     playlistId: string | null

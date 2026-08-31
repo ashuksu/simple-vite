@@ -1,4 +1,4 @@
-import {API_KEY, API_URL} from "../../../shared/config/api-config";
+import {API_KEY, API_URL} from "../../../shared/config";
 import type {GetTrackDetailsOutput, GetTrackListOutput} from "../model/types";
 
 const PAGE_SIZE = (value?: number) => value !== undefined ? `?pageSize=${value}` : '';

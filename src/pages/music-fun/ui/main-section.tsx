@@ -1,4 +1,4 @@
-import {Title} from "../../../shared/ui/title.tsx";
+import {Title} from "../../../shared/ui";
 import {TrackList} from "../../../widgets/track-list";
 
 interface MainProps {

@@ -1,4 +1,4 @@
-import type {SchemaGetPlaylistsRequestPayload} from "../../lib/schema.ts";
+import type {SchemaGetPlaylistsRequestPayload} from "../../lib";
 
 export const playlistsKeys = {
     all: ['playlists'] as const,

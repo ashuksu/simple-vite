@@ -1,4 +1,4 @@
-import {Title} from "../../../shared/ui/title";
+import {Title} from "../../../shared/ui";
 import {TrackDetails} from "../../../entities/track";
 import {Game} from "../../../widgets/game";
 

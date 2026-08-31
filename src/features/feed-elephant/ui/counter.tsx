@@ -1,6 +1,5 @@
 import {type Props, useCounter} from "../model/use-counter.ts";
 
-
 export function Counter(props: Props) {
     const {endCount, handleClick} = useCounter(props);
 

@@ -1,7 +1,6 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query"
-import {client} from "../../../shared/api/client.ts";
-import {OAUTH_REDIRECT_URI} from "../../../shared/config/api-config.ts";
-import {localStorageKeys} from "../../../shared/config/localstorage-keys.ts";
+import {localStorageKeys, OAUTH_REDIRECT_URI} from "../../../shared/config";
+import {client} from "../../../shared/api";
 
 export const useLoginMutation = () => {
     const queryClient = useQueryClient()

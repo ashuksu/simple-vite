@@ -1,6 +1,6 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query"
-import {client} from "../../../shared/api/client.ts";
-import {localStorageKeys} from "../../../shared/config/localstorage-keys.ts";
+import {localStorageKeys} from "../../../shared/config";
+import {client} from "../../../shared/api";
 
 export const useLogoutMutation = () => {
     const queryClient = useQueryClient()
