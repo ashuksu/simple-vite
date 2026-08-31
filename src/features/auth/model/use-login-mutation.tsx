@@ -1,6 +1,7 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query"
 import {client} from "../../../shared/api/client.ts";
-import {OAUTH_REDIRECT_URI} from "../../../config.ts";
+import {OAUTH_REDIRECT_URI} from "../../../shared/config/api-config.ts";
+import {localStorageKeys} from "../../../shared/config/localstorage-keys.ts";
 
 export const useLoginMutation = () => {
     const queryClient = useQueryClient()
@@ -25,8 +26,8 @@ export const useLoginMutation = () => {
             return data;
         },
         onSuccess: (data) => {
-            localStorage.setItem('oauth-refresh-token', data.refreshToken)
-            localStorage.setItem('oauth-access-token', data.accessToken)
+            localStorage.setItem(localStorageKeys.refreshToken, data.refreshToken)
+            localStorage.setItem(localStorageKeys.accessToken, data.accessToken)
             queryClient.invalidateQueries({
                 queryKey: ['auth', 'me']
             })

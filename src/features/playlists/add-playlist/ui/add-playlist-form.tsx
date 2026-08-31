@@ -1,30 +1,26 @@
-import {useMutation, useQueryClient} from "@tanstack/react-query"
 import {useForm} from 'react-hook-form'
-import {client} from "../../../../shared/api/client"
 import type {SchemaCreatePlaylistRequestPayload} from "../../../../shared/lib/schema.ts";
+import {useAddPlaylistMutation} from "../model/use-add-playlist-mutation.ts";
+import {type JsonApiErrorDocument} from "../../../../shared/util/json-api-error.ts";
+import {queryErrorHandlerForRHFFactory} from "../../../../shared/ui/util/query-error-handler-for-rhf-factory.ts";
 
 export const AddPlaylistForm = () => {
-    const {register, handleSubmit} = useForm<SchemaCreatePlaylistRequestPayload>();
-    const queryClient = useQueryClient()
+    const {
+        register,
+        handleSubmit,
+        reset,
+        setError,
+        formState: {errors}
+    } = useForm<SchemaCreatePlaylistRequestPayload>();
+    const {mutateAsync} = useAddPlaylistMutation()
 
-    const {mutate} = useMutation({
-        mutationFn: async (data: SchemaCreatePlaylistRequestPayload) => {
-            const response = await client.POST('/playlists', {
-                body: data
-            })
-
-            return response.data;
-        },
-        onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ['playlists'],
-                refetchType: 'all'
-            })
+    const onSubmit = async (data: SchemaCreatePlaylistRequestPayload) => {
+        try {
+            await mutateAsync(data)
+            reset()
+        } catch (error) {
+            queryErrorHandlerForRHFFactory({setError})(error as unknown as JsonApiErrorDocument)
         }
-    })
-
-    const onSubmit = (data: SchemaCreatePlaylistRequestPayload) => {
-        mutate(data)
     }
 
     return (
@@ -33,27 +29,49 @@ export const AddPlaylistForm = () => {
             className='form max-w-md border rounded p-4'>
             <input type="hidden" value="playlists" {...register('data.type')} />
             <h3 className='m-0'>Add New Playlist</h3>
-            <label
-                className='input-block'>
-                <span>Playlist Name</span>
-                <input
-                    {...register('data.attributes.title')}
-                    className="input"
-                    type="text"
-                    placeholder="Playlist Name"/>
-            </label>
-            <label
-                className='input-block'>
-                <span>Playlist Description</span>
-                <textarea
-                    {...register('data.attributes.description')}
-                    className="input"
-                    placeholder="Playlist Description"/>
-            </label>
-            <button
-                className='button button--md w-full'
-                type="submit">Add Playlist
-            </button>
+            <div>
+                <label
+                    className='input-block'>
+                    <span>Playlist Name *</span>
+                    <input
+                        {...register('data.attributes.title')}
+                        className="input"
+                        type="text"
+                        placeholder="Playlist Name"/>
+                </label>
+                {errors.data?.attributes?.title && (
+                    <p className="text-red-500 mt-1 wrap-break-word">
+                        {errors.data.attributes.title.message}
+                    </p>
+                )}
+            </div>
+            <div>
+                <label
+                    className='input-block'>
+                    <span>Playlist Description</span>
+                    <textarea
+                        {...register('data.attributes.description')}
+                        className="input"
+                        placeholder="Playlist Description"/>
+                </label>
+                {errors.data?.attributes?.description && (
+                    <p className="text-red-500 mt-1 wrap-break-word">
+                        {errors.data.attributes.description.message}
+                    </p>
+                )}
+            </div>
+            <div>
+                <button
+                    className='button button--md w-full'
+                    type="submit">
+                    Add Playlist
+                </button>
+                {errors.root?.server && (
+                    <p className="text-red-500 mt-1 wrap-break-word">
+                        {errors.root.server.message}
+                    </p>
+                )}
+            </div>
         </form>
     )
 }

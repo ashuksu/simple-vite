@@ -1,5 +1,6 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query"
 import {client} from "../../../shared/api/client.ts";
+import {localStorageKeys} from "../../../shared/config/localstorage-keys.ts";
 
 export const useLogoutMutation = () => {
     const queryClient = useQueryClient()
@@ -8,15 +9,15 @@ export const useLogoutMutation = () => {
         mutationFn: async () => {
             const {data} = await client.POST('/auth/logout', {
                 body: {
-                    refreshToken: localStorage.getItem('oauth-refresh-token')!
+                    refreshToken: localStorage.getItem(localStorageKeys.refreshToken)!
                 }
             })
 
             return data;
         },
         onSuccess: () => {
-            localStorage.removeItem('oauth-refresh-token')
-            localStorage.removeItem('oauth-access-token')
+            localStorage.removeItem(localStorageKeys.refreshToken)
+            localStorage.removeItem(localStorageKeys.accessToken)
             queryClient.resetQueries({
                 queryKey: ['auth', 'me']
             })

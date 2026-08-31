@@ -1,5 +1,5 @@
 import {cn} from "tailwind-variants";
-import {API_URL, OAUTH_REDIRECT_URI} from "../../../config.ts";
+import {API_URL, OAUTH_REDIRECT_URI} from "../../../shared/config/api-config.ts";
 import {useLoginMutation} from "../model/use-login-mutation.tsx";
 
 export const LoginButton = () => {
