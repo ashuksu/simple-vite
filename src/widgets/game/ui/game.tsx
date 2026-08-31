@@ -1,6 +1,6 @@
 import {Counter} from "../../../features/feed-elephant/ui/counter.tsx";
 import {Elephant} from "../../../entities/elephant/ui/elephant.tsx";
-import {useGame} from "../model/use-game.tsx";
+import {useGame} from "../model/use-game.ts";
 import {cx} from "tailwind-variants";
 import style from "./game.module.css"
 

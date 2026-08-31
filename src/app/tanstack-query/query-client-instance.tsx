@@ -1,5 +1,5 @@
 import {MutationCache, QueryClient} from "@tanstack/react-query";
-import {mutationGlobalErrorHandler} from "../../shared/ui/util/query-error-handler-for-rhf-factory.ts";
+import {mutationGlobalErrorHandler} from "../../shared/lib/error-handlers/query-error-handler-for-rhf-factory.ts";
 
 export type MutationMeta = {
     /**

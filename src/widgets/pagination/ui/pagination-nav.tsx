@@ -1,4 +1,4 @@
-import {getPaginationPages} from "../../pagination/mode/get-pagination-pages.ts";
+import {getPaginationPages} from "../model/get-pagination-pages.ts";
 import {tv} from "tailwind-variants";
 
 type Props = {

@@ -1,6 +1,6 @@
-import {MainSection} from "../widgets/music-fun/ui/main-section.tsx";
-import SidebarMenu from "../widgets/music-fun/ui/sidebar-menu.tsx";
-import {useTrackSelection} from "../features/select-track/model/use-track-selection.tsx";
+import {MainSection} from "./main-section.tsx";
+import SidebarMenu from "./sidebar-menu.tsx";
+import {useTrackSelection} from "../../../features/select-track/model/use-track-selection.ts";
 
 export function MusicFunPage() {
     const {trackId, setTrackId} = useTrackSelection();

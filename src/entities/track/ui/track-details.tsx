@@ -1,4 +1,4 @@
-import {useTrackDetails} from "../../../entities/track/model/use-track-details.tsx";
+import {useTrackDetails} from "../model/use-track-details.tsx";
 
 interface Props {
     trackId: string | null;

@@ -1,5 +1,5 @@
 import {cx} from "tailwind-variants";
-import {PaginationNav} from "../../pagination-nav/ui/pagination-nav.tsx";
+import {PaginationNav} from "./pagination-nav.tsx";
 
 type Props = {
     current: number,

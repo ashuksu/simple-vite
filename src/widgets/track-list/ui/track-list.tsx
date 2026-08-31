@@ -1,4 +1,4 @@
-import {TrackItem} from "../../track/ui/track-item.tsx";
+import {TrackItem} from "../../../entities/track/ui/track-item.tsx";
 import {useTracks} from "../../../entities/track/model/use-tracks.tsx";
 import {cx} from "tailwind-variants";
 

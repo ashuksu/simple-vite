@@ -1,6 +1,6 @@
 import type {FieldValues, Path, UseFormSetError} from 'react-hook-form'
 import {toast} from 'react-toastify'
-import {isJsonApiErrorDocument, type JsonApiErrorDocument, parseJsonApiErrors,} from '../../util/json-api-error.ts'
+import {isJsonApiErrorDocument, type JsonApiErrorDocument, parseJsonApiErrors,} from './json-api-error.ts'
 
 export const queryErrorHandlerForRHFFactory = <T extends FieldValues>({
                                                                           setError,

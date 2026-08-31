@@ -3,8 +3,10 @@ import type {SchemaUpdatePlaylistRequestPayload} from "../../../../shared/lib/sc
 import {useEffect} from "react";
 import {usePlaylistQuery} from "../model/use-playlist-query.ts";
 import {useUpdatePlaylistMutation} from "../model/use-update-playlist-mutation.ts";
-import {type JsonApiErrorDocument} from "../../../../shared/util/json-api-error.ts";
-import {queryErrorHandlerForRHFFactory} from "../../../../shared/ui/util/query-error-handler-for-rhf-factory.ts";
+import {type JsonApiErrorDocument} from "../../../../shared/lib/error-handlers/json-api-error.ts";
+import {
+    queryErrorHandlerForRHFFactory
+} from "../../../../shared/lib/error-handlers/query-error-handler-for-rhf-factory.ts";
 
 type Props = {
     playlistId: string | null
