@@ -6,7 +6,6 @@ import {playlistsKeys} from "../../../../shared/api/keys-factories/playlists-key
 type MutationVariables = SchemaUpdatePlaylistRequestPayload & { playlistId: string }
 
 export const useUpdatePlaylistMutation = ({onSuccess}: { onSuccess?: () => void }) => {
-    const key = playlistsKeys.meList();
     const queryClient = useQueryClient();
 
     return useMutation({
@@ -21,6 +20,7 @@ export const useUpdatePlaylistMutation = ({onSuccess}: { onSuccess?: () => void 
                     ...rest,
                     data: {
                         ...rest.data,
+                        type: 'playlists',
                         attributes: {
                             ...rest.data.attributes,
                             tagIds: [],
@@ -32,36 +32,30 @@ export const useUpdatePlaylistMutation = ({onSuccess}: { onSuccess?: () => void 
             return response.data;
         },
         onMutate: async (variables: MutationVariables) => {
-            await queryClient.cancelQueries({queryKey: playlistsKeys.all})
+            await queryClient.cancelQueries({queryKey: playlistsKeys.all});
 
-            const previousMyPlatLists = queryClient.getQueryData(key)
-
-            queryClient.setQueryData(key, (oldData: SchemaGetPlaylistsOutput) => {
-                return {
-                    ...oldData,
-                    data: oldData.data.map(p => {
-                        if (p.id === variables.playlistId) {
-                            return {
-                                ...p,
-                                attributes: {
-                                    ...p.attributes,
-                                    description: variables.data.attributes.description,
-                                    title: variables.data.attributes.title,
+            queryClient.setQueriesData(
+                {queryKey: playlistsKeys.lists()},
+                (oldData: SchemaGetPlaylistsOutput | undefined) => {
+                    if (!oldData?.data) return oldData;
+                    return {
+                        ...oldData,
+                        data: oldData.data.map(p => {
+                            if (p.id === variables.playlistId) {
+                                return {
+                                    ...p,
+                                    attributes: {
+                                        ...p.attributes,
+                                        description: variables.data.attributes.description,
+                                        title: variables.data.attributes.title,
+                                    }
                                 }
                             }
-                        } else {
-                            return p;
-                        }
-                    })
-                }
-            })
 
-            return {previousMyPlatLists}
-        },
-        onError: (_, __: MutationVariables, context) => {
-            queryClient.setQueryData(
-                key,
-                context!.previousMyPlatLists,
+                            return p;
+                        })
+                    }
+                }
             )
         },
         onSuccess: () => {

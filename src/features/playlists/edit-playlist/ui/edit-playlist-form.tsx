@@ -11,12 +11,21 @@ type Props = {
 
 export const EditPlaylistForm = ({playlistId, onCancelEditing}: Props) => {
     const {register, handleSubmit, reset} = useForm<SchemaUpdatePlaylistRequestPayload>();
+    const {data, isPending, isError} = usePlaylistQuery(playlistId);
 
     useEffect(() => {
-        reset();
-    }, [playlistId, reset]);
-
-    const {data, isPending, isError} = usePlaylistQuery(playlistId);
+        if (data?.data) {
+            reset({
+                data: {
+                    type: 'playlists',
+                    attributes: {
+                        title: data.data.attributes.title,
+                        description: data.data.attributes.description ?? '',
+                    },
+                },
+            });
+        }
+    }, [data, playlistId, reset]);
 
     const {mutate} = useUpdatePlaylistMutation({
         onSuccess: () => {
@@ -24,11 +33,11 @@ export const EditPlaylistForm = ({playlistId, onCancelEditing}: Props) => {
         }
     });
 
-    const onSubmit = (data: SchemaUpdatePlaylistRequestPayload) => {
-        mutate({...data, playlistId: playlistId!})
+    const onSubmit = (formData: SchemaUpdatePlaylistRequestPayload) => {
+        mutate({...formData, playlistId: playlistId!})
     }
 
-    if (!playlistId) return <></>;
+    if (!playlistId) return null;
     if (isPending) return <div>Loading...</div>;
     if (isError) return <div>Error loading playlist</div>;
 
