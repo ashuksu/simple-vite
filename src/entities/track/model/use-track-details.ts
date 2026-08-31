@@ -1,15 +1,13 @@
 import {useEffect, useState} from "react";
-import {getTrack, type TrackDetailsResource} from "../../../shared/api/base.ts";
+import {getTrack} from "../api/track-api";
+import type {TrackDetailsResource} from "./types";
 
 export function useTrackDetails(trackId: string | null) {
-    const [trackDetails, seTrackDetails] = useState<TrackDetailsResource | null>(null);
+    const [trackDetails, setTrackDetails] = useState<TrackDetailsResource | null>(null);
 
     useEffect(() => {
         if (!trackId) return;
-
-        getTrack(trackId)
-            .then(json => seTrackDetails(json.data))
-            .catch(err => console.error('Error Selected Track: ' + err));
+        getTrack(trackId).then((res) => setTrackDetails(res.data));
     }, [trackId]);
 
     return {trackDetails};

@@ -1,13 +1,13 @@
 import {useEffect, useState} from "react";
-import {getTracks, type Track} from "../../../shared/api/base.ts";
+import {getTracks} from "../api/track-api";
+import type {Track} from "./types";
 
 export function useTracks() {
-    const [tracks, setTracks] = useState<Array<Track> | null>(null);
+    const [tracks, setTracks] = useState<Track[] | null>(null);
 
     useEffect(() => {
-        getTracks().then(json => setTracks(json.data))
-            .catch(err => console.error('Error Track List: ', err));
+        getTracks().then((res) => setTracks(res.data));
     }, []);
 
-    return {tracks}
+    return {tracks};
 }
