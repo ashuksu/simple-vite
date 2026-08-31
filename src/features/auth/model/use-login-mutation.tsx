@@ -1,6 +1,6 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query"
 import {client} from "../../../shared/api/client.ts";
-import {OAUTH_REDIRECT_URI} from "../../../config.ts";
+import {OAUTH_REDIRECT_URI} from "../../../shared/config/api-config.ts";
 
 export const useLoginMutation = () => {
     const queryClient = useQueryClient()
