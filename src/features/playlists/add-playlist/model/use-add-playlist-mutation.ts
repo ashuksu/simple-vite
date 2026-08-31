@@ -33,6 +33,7 @@ export const useAddPlaylistMutation = () => {
                 queryKey: playlistsKeys.lists(),
                 refetchType: 'all'
             })
-        }
+        },
+        meta: {globalErrorHandler: 'on'}
     })
 }

@@ -14,25 +14,16 @@ export const queryErrorHandlerForRHFFactory = <T extends FieldValues>({
 
             // полевые ошибки
             for (const [field, message] of Object.entries(fieldErrors)) {
-                const fieldPath = `data.attributes.${field}` as Path<T>
-                setError?.(fieldPath, {type: 'server', message})
+                setError?.(field as Path<T>, {type: 'server', message})
             }
 
             // «глобальные» (без pointer)
             if (globalErrors.length > 0) {
-                const globalMessage = globalErrors.join('\n');
-
-                // ПОКАЗЫВАЕМ TOAST!
-                toast.error(globalMessage);
-
-                setError?.('root.server' as Path<T>, {
+                setError?.('root.server', {
                     type: 'server',
                     message: globalErrors.join('\n'),
                 })
             }
-        } else {
-            // Если пришла стандартная или неизвестная ошибка
-            toast.error('An unexpected error occurred');
         }
     }
 }
@@ -44,7 +35,7 @@ export const mutationGlobalErrorHandler = (
     mutation: unknown
 ) => {
     // @ts-expect-error look at MutationMeta type
-    if (mutation?.meta?.globalErrorHandler === 'off') {
+    if (mutation.meta.globalErrorHandler === 'off') {
         return
     }
 
