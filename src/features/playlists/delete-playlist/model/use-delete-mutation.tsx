@@ -22,8 +22,7 @@ export const useDeleteMutation = () => {
                 }
             })
 
-            queryClient.setQueryData(playlistsKeys.detail(playlistId), null);
-            // queryClient.setQueriesData({queryKey: playlistsKeys.detail(playlistId)}, () => null);
+            queryClient.removeQueries({queryKey: playlistsKeys.detail(playlistId)});
         }
     })
 }

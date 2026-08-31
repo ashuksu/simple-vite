@@ -6,15 +6,19 @@ import usePlaylistsQuery from "../api/use-playlists-query.ts";
 type Props = {
     userId?: string
     onPlaylistSelected?: (playlistId: string) => void
+    onPlaylistDeleted?: (playlistId: string) => void
     isSearchActive?: boolean
 }
-export const Playlists = ({userId, onPlaylistSelected, isSearchActive = false}: Props) => {
+export const Playlists = ({userId, onPlaylistSelected, onPlaylistDeleted, isSearchActive = false}: Props) => {
     const [pageNumber, setPage] = useState(1);
     const [search, setSearch] = useState('');
     const query = usePlaylistsQuery(userId, {search, pageNumber})
 
     const handlePlaylistSelectedClick = (playlistId: string) => {
         onPlaylistSelected?.(playlistId);
+    }
+    const handlePlaylistClick = (playlistId: string) => {
+        onPlaylistDeleted?.(playlistId);
     }
 
     if (query.isPending) return <div>Loading...</div>;
@@ -41,10 +45,15 @@ export const Playlists = ({userId, onPlaylistSelected, isSearchActive = false}: 
             <ul className="flex flex-col gap-2">
                 {query.data.data.map((playlist) => (
                     <li
-                        onClick={() => handlePlaylistSelectedClick(playlist.id)}
                         className='flex items-center gap-1'
-                        key={playlist.id}>
-                        {playlist.attributes.title} <DeletePlaylist playlistId={playlist.id}/>
+                        key={playlist.id}
+                    >
+                        <span onClick={() => handlePlaylistSelectedClick(playlist.id)}>
+                            {playlist.attributes.title}
+                        </span>
+                        <DeletePlaylist
+                            playlistId={playlist.id}
+                            onDeleted={handlePlaylistClick}/>
                     </li>
                 ))}
             </ul>
