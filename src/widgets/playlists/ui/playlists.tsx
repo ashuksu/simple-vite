@@ -1,8 +1,7 @@
-import {keepPreviousData, useQuery} from "@tanstack/react-query";
-import {client} from "../../../shared/api/client.ts";
 import {Pagination} from "../../pagination/ui/pagination.tsx";
 import {useState} from "react";
 import {DeletePlaylist} from "../../../features/playlists/delete-playlist/ui/delete-playlist.tsx";
+import usePlaylistsQuery from "../api/use-playlists-query.ts";
 
 type Props = {
     userId?: string
@@ -10,37 +9,9 @@ type Props = {
     isSearchActive?: boolean
 }
 export const Playlists = ({userId, onPlaylistSelected, isSearchActive = false}: Props) => {
-    const [page, setPage] = useState(1);
+    const [pageNumber, setPage] = useState(1);
     const [search, setSearch] = useState('');
-
-    const key = userId ? ['playlists', 'my', userId] : ['playlists', {page, search}]
-    const queryParams = userId ? {
-        userId
-    } : {
-        pageNumber: page,
-        search,
-    }
-    const query = useQuery({
-        // eslint-disable-next-line @tanstack/query/exhaustive-deps
-        queryKey: key,
-        queryFn: async ({signal}) => {
-            const {data, error} = await client.GET('/playlists', {
-                params: {
-                    query: queryParams
-                },
-                signal //request interruption
-            });
-
-            if (error) {
-                throw error;
-                // console.warn('Error playlists: ', error);
-                // return null;
-            }
-
-            return data;
-        },
-        placeholderData: keepPreviousData
-    });
+    const query = usePlaylistsQuery(userId, {search, pageNumber})
 
     const handlePlaylistSelectedClick = (playlistId: string) => {
         onPlaylistSelected?.(playlistId);
@@ -63,7 +34,7 @@ export const Playlists = ({userId, onPlaylistSelected, isSearchActive = false}: 
             />}
             <Pagination
                 pagesCount={query.data.meta.pagesCount}
-                current={page} // query.data.meta.page
+                current={pageNumber} // query.data.meta.page
                 changePageNumber={setPage}
                 isFetching={query.isFetching}
             />
