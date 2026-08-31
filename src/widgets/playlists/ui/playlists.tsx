@@ -7,21 +7,26 @@ import {DeletePlaylist} from "../../../features/playlists/delete-playlist/ui/del
 type Props = {
     userId?: string
     onPlaylistSelected?: (playlistId: string) => void
+    isSearchActive?: boolean
 }
-export const Playlists = ({userId, onPlaylistSelected}: Props) => {
+export const Playlists = ({userId, onPlaylistSelected, isSearchActive = false}: Props) => {
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState('');
 
+    const key = userId ? ['playlists', 'my', userId] : ['playlists', {page, search}]
+    const queryParams = userId ? {
+        userId
+    } : {
+        pageNumber: page,
+        search,
+    }
     const query = useQuery({
-        queryKey: ['playlists', {page, search, userId}],
+        // eslint-disable-next-line @tanstack/query/exhaustive-deps
+        queryKey: key,
         queryFn: async ({signal}) => {
             const {data, error} = await client.GET('/playlists', {
                 params: {
-                    query: {
-                        pageNumber: page,
-                        search,
-                        userId
-                    }
+                    query: queryParams
                 },
                 signal //request interruption
             });
@@ -46,7 +51,7 @@ export const Playlists = ({userId, onPlaylistSelected}: Props) => {
 
     return (
         <div className='flex flex-col gap-3 max-w-md'>
-            <input
+            {isSearchActive && <input
                 value={search}
                 onChange={(e) => {
                     setSearch(e.target.value);
@@ -55,7 +60,7 @@ export const Playlists = ({userId, onPlaylistSelected}: Props) => {
                 type="text"
                 placeholder="Search..."
                 className="input max-w-md"
-            />
+            />}
             <Pagination
                 pagesCount={query.data.meta.pagesCount}
                 current={page} // query.data.meta.page
