@@ -1,7 +1,7 @@
-import {Pagination} from "../../pagination/ui/pagination.tsx";
+import {Pagination} from "../../pagination/ui/pagination";
 import {useState} from "react";
-import {DeletePlaylist} from "../../../features/playlists/delete-playlist/ui/delete-playlist.tsx";
-import usePlaylistsQuery from "../../../entities/playlist/api/use-playlists-query.ts";
+import {DeletePlaylist} from "../../../features/playlists/delete-playlist";
+import usePlaylistsQuery from "../../../entities/playlist/api/use-playlists-query";
 
 type Props = {
     userId?: string

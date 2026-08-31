@@ -1,8 +1,8 @@
-import {Playlists} from "../../../widgets/playlists/ui/playlists.tsx";
-import {useMeQuery} from "../../../features/auth/model/use-me-query.ts";
+import {Playlists} from "../../../widgets/playlists/ui/playlists";
+import {useMeQuery} from "../../../features/auth";
 import {Navigate} from "@tanstack/react-router";
-import {AddPlaylistForm} from "../../../features/playlists/add-playlist/ui/add-playlist-form.tsx";
-import {EditPlaylistForm} from "../../../features/playlists/edit-playlist/ui/edit-playlist-form.tsx";
+import {AddPlaylistForm} from "../../../features/playlists/add-playlist";
+import {EditPlaylistForm} from "../../../features/playlists/edit-playlist";
 import {useState} from "react";
 
 export function MyPlaylistPage() {
