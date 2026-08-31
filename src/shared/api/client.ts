@@ -1,6 +1,7 @@
 import createClient, {type Middleware} from "openapi-fetch";
 import type {paths} from "../lib/schema.ts";
-import {API_KEY, API_URL} from "../../config.ts";
+import {API_KEY, API_URL} from "../config/api-config.ts";
+import {localStorageKeys} from "../config/localstorage-keys.ts";
 
 const headers: HeadersInit = API_KEY ? {'api-key': API_KEY} : {};
 
@@ -10,7 +11,7 @@ let refreshPromise: Promise<void> | null = null;
 function makeRefreshToken() {
     if (!refreshPromise) {
         refreshPromise = (async (): Promise<void> => {
-            const refreshToken = localStorage.getItem('oauth-refresh-token');
+            const refreshToken = localStorage.getItem(localStorageKeys.refreshToken);
             if (!refreshToken) throw new Error('No refresh token');
 
             const response = await fetch(API_URL + 'auth/refresh', {
@@ -25,14 +26,14 @@ function makeRefreshToken() {
             })
 
             if (!response.ok) {
-                localStorage.removeItem('oauth-refresh-token')
-                localStorage.removeItem('oauth-access-token')
+                localStorage.removeItem(localStorageKeys.refreshToken)
+                localStorage.removeItem(localStorageKeys.accessToken)
                 throw new Error('Refresh token failed');
             }
 
             const data = await response.json();
-            localStorage.setItem('oauth-refresh-token', data.refreshToken)
-            localStorage.setItem('oauth-access-token', data.accessToken)
+            localStorage.setItem(localStorageKeys.refreshToken, data.refreshToken)
+            localStorage.setItem(localStorageKeys.accessToken, data.accessToken)
         })()
 
         refreshPromise.finally(() => {
@@ -45,7 +46,7 @@ function makeRefreshToken() {
 
 const authMiddleware: Middleware = {
     async onRequest({request}) {
-        const accessToken = localStorage.getItem('oauth-access-token');
+        const accessToken = localStorage.getItem(localStorageKeys.accessToken);
 
         if (accessToken) {
             request.headers.set("Authorization", "Bearer " + accessToken);
@@ -74,7 +75,7 @@ const authMiddleware: Middleware = {
             })
             retryRequest.headers.set(
                 "Authorization",
-                "Bearer " + localStorage.getItem('oauth-access-token')
+                "Bearer " + localStorage.getItem(localStorageKeys.accessToken)
             );
             return fetch(retryRequest);
         } catch {
