@@ -1,5 +1,5 @@
 import {cn} from "tailwind-variants";
-import {useLogoutMutation} from "../model/use-logout-mutation.tsx";
+import {useLogoutMutation} from "../model/use-logout-mutation.ts";
 
 export const LogoutButton = () => {
     const mutation = useLogoutMutation()

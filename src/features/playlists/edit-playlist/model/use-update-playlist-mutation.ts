@@ -1,7 +1,7 @@
 import type {SchemaGetPlaylistsOutput, SchemaUpdatePlaylistRequestPayload} from "../../../../shared/lib/schema.ts";
 import {client} from "../../../../shared/api/client.ts";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {playlistsKeys} from "../../../../shared/api/keys-factories/playlists-keys-factoriy.ts";
+import {playlistsKeys} from "../../../../shared/api/keys-factories/playlists-keys-factory.ts";
 
 type MutationVariables = SchemaUpdatePlaylistRequestPayload & { playlistId: string }
 

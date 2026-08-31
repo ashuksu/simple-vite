@@ -1,5 +1,5 @@
 import {keepPreviousData, useQuery} from "@tanstack/react-query";
-import {playlistsKeys} from "../../../shared/api/keys-factories/playlists-keys-factoriy.ts";
+import {playlistsKeys} from "../../../shared/api/keys-factories/playlists-keys-factory.ts";
 import {client} from "../../../shared/api/client.ts";
 import type {SchemaGetPlaylistsRequestPayload} from "../../../shared/lib/schema.ts";
 
@@ -8,7 +8,7 @@ const usePlaylistsQuery = (userId: string | undefined, filter: Partial<SchemaGet
     const key = userId
         ? [...playlistsKeys.meList(), queryParams]
         : playlistsKeys.list(filter);
-    
+
     return useQuery({
         queryKey: key,
         queryFn: async ({signal}) => {

@@ -1,4 +1,4 @@
-import {type Props, useCounter} from "../model/use-counter.tsx";
+import {type Props, useCounter} from "../model/use-counter.ts";
 
 
 export function Counter(props: Props) {

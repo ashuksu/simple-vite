@@ -1,6 +1,6 @@
 import {ConditionElephant} from "./condition-elephant.tsx";
 import {ButtonFood} from "../../../features/feed-elephant/ui/button-food.tsx";
-import {type Props, useElephant} from "../model/use-elephant.tsx";
+import {type Props, useElephant} from "../model/use-elephant.ts";
 import {cx} from "tailwind-variants";
 
 export function Elephant(props: Props) {

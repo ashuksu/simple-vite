@@ -1,7 +1,7 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query"
 import {client} from "../../../../shared/api/client.ts";
 import type {SchemaGetPlaylistsOutput} from "../../../../shared/lib/schema.ts";
-import {playlistsKeys} from "../../../../shared/api/keys-factories/playlists-keys-factoriy.ts";
+import {playlistsKeys} from "../../../../shared/api/keys-factories/playlists-keys-factory.ts";
 
 export const useDeleteMutation = () => {
     const queryClient = useQueryClient();
