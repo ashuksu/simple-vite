@@ -1,5 +1,5 @@
 import {Title} from "../../../shared/ui/title.tsx";
-import {TrackList} from "../../../widgets/track-list/ui/track-list.tsx";
+import {TrackList} from "../../../widgets/track-list";
 
 interface MainProps {
     trackId: string | null;

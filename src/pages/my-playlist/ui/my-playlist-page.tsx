@@ -1,4 +1,4 @@
-import {Playlists} from "../../../widgets/playlists/ui/playlists";
+import {Playlists} from "../../../widgets/playlists";
 import {useMeQuery} from "../../../features/auth";
 import {Navigate} from "@tanstack/react-router";
 import {AddPlaylistForm} from "../../../features/playlists/add-playlist";

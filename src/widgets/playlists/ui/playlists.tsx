@@ -1,4 +1,4 @@
-import {Pagination} from "../../pagination/ui/pagination";
+import {Pagination} from "../../pagination";
 import {useState} from "react";
 import {DeletePlaylist} from "../../../features/playlists/delete-playlist";
 import usePlaylistsQuery from "../../../entities/playlist/api/use-playlists-query";
