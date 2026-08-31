@@ -6,9 +6,10 @@ import {useUpdatePlaylistMutation} from "../model/use-update-playlist-mutation.t
 
 type Props = {
     playlistId: string | null
+    onCancelEditing: () => void
 }
 
-export const EditPlaylistForm = ({playlistId}: Props) => {
+export const EditPlaylistForm = ({playlistId, onCancelEditing}: Props) => {
     const {register, handleSubmit, reset} = useForm<SchemaUpdatePlaylistRequestPayload>();
 
     useEffect(() => {
@@ -51,11 +52,19 @@ export const EditPlaylistForm = ({playlistId}: Props) => {
                     className="input"
                     placeholder="Playlist Description"/>
             </label>
-            <button
-                className='button button--md w-full'
-                type="submit">
-                Save Playlist
-            </button>
+            <div className='grid grid-cols-2 gap-4'>
+                <button
+                    className='button button--accent button--md'
+                    onClick={onCancelEditing}
+                    type="reset">
+                    Cancel
+                </button>
+                <button
+                    className='button button--md'
+                    type="submit">
+                    Save Playlist
+                </button>
+            </div>
         </form>
     )
 }

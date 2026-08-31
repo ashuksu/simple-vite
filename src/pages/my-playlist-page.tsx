@@ -39,7 +39,11 @@ export function MyPlaylistPage() {
                         setEditingPlayListId(playlistId)
                     }}
                     onPlaylistDeleted={handlePlaylistDelete}/>
-                <EditPlaylistForm playlistId={editingPlayListId}/>
+                <EditPlaylistForm
+                    playlistId={editingPlayListId}
+                    onCancelEditing={() => {
+                        setEditingPlayListId(null)
+                    }}/>
             </div>
         </div>
     )
