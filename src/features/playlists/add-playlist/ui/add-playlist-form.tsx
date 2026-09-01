@@ -5,6 +5,7 @@ import {
     queryErrorHandlerForRHFFactory,
     type SchemaCreatePlaylistRequestPayload
 } from "../../../../shared/lib";
+import {FormFieldError} from "../../../../shared/ui";
 
 export const AddPlaylistForm = () => {
     const {
@@ -41,11 +42,7 @@ export const AddPlaylistForm = () => {
                         type="text"
                         placeholder="Playlist Name"/>
                 </label>
-                {errors.data?.attributes?.title && (
-                    <p className="text-red-500 mt-1 wrap-break-word">
-                        {errors.data.attributes.title.message}
-                    </p>
-                )}
+                <FormFieldError message={errors.data?.attributes?.title?.message}/>
             </div>
             <div>
                 <label
@@ -56,11 +53,7 @@ export const AddPlaylistForm = () => {
                         className="input"
                         placeholder="Playlist Description"/>
                 </label>
-                {errors.data?.attributes?.description && (
-                    <p className="text-red-500 mt-1 wrap-break-word">
-                        {errors.data.attributes.description.message}
-                    </p>
-                )}
+                <FormFieldError message={errors.data?.attributes?.description?.message}/>
             </div>
             <div>
                 <button
@@ -68,11 +61,7 @@ export const AddPlaylistForm = () => {
                     type="submit">
                     Add Playlist
                 </button>
-                {errors.root?.server && (
-                    <p className="text-red-500 mt-1 wrap-break-word">
-                        {errors.root.server.message}
-                    </p>
-                )}
+                <FormFieldError message={errors.root?.server?.message}/>
             </div>
         </form>
     )

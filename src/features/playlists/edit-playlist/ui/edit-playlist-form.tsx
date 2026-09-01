@@ -7,6 +7,7 @@ import {
     queryErrorHandlerForRHFFactory,
     type SchemaUpdatePlaylistRequestPayload
 } from "../../../../shared/lib";
+import {FormFieldError} from "../../../../shared/ui";
 
 type Props = {
     playlistId: string | null
@@ -68,16 +69,11 @@ export const EditPlaylistForm = ({playlistId, onCancelEditing}: Props) => {
                     <span>Playlist Name *</span>
                     <input
                         {...register('data.attributes.title')}
-                        defaultValue={data?.data.attributes.title}
                         className="input"
                         type="text"
                         placeholder="Playlist Name"/>
                 </label>
-                {errors.data?.attributes?.title && (
-                    <p className="text-red-500 mt-1 wrap-break-word">
-                        {errors.data.attributes.title.message}
-                    </p>
-                )}
+                <FormFieldError message={errors.data?.attributes?.title?.message}/>
             </div>
             <div>
                 <label
@@ -85,15 +81,10 @@ export const EditPlaylistForm = ({playlistId, onCancelEditing}: Props) => {
                     <span>Playlist Description</span>
                     <textarea
                         {...register('data.attributes.description')}
-                        defaultValue={data?.data.attributes.description ?? ''}
                         className="input"
                         placeholder="Playlist Description"/>
                 </label>
-                {errors.data?.attributes?.description && (
-                    <p className="text-red-500 mt-1 wrap-break-word">
-                        {errors.data.attributes.description.message}
-                    </p>
-                )}
+                <FormFieldError message={errors.data?.attributes?.description?.message}/>
             </div>
             <div>
                 <div className='grid grid-cols-2 gap-4'>
@@ -109,11 +100,7 @@ export const EditPlaylistForm = ({playlistId, onCancelEditing}: Props) => {
                         Save Playlist
                     </button>
                 </div>
-                {errors.root?.server && (
-                    <p className="text-red-500 mt-1 wrap-break-word">
-                        {errors.root.server.message}
-                    </p>
-                )}
+                <FormFieldError message={errors.root?.server?.message}/>
             </div>
         </form>
     )
