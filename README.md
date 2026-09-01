@@ -51,11 +51,14 @@ pnpm install
 
 ### 2. Environment Setup
 
+To use the API locally, register an account at [IT-Incubator API Hub](https://apihub.it-incubator.io/en/2) to generate
+your `API key`.
+
 Create a `.env` file in the root directory and specify your configuration:
 
 ```env
-VITE_API_URL=https://your-api-url.com/
-VITE_API_KEY=your_api_key
+VITE_API_URL=https://apihub.it-incubator.io/
+VITE_API_KEY=your_api_key_from_apihub
 
 ```
 
