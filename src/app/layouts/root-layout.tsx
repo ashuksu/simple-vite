@@ -1,8 +1,8 @@
 import {HeadContent, Outlet} from "@tanstack/react-router";
 import {TanStackRouterDevtools} from "@tanstack/react-router-devtools";
-import {Header} from "../../widgets/header/ui/header.tsx";
-import {Footer} from "../../widgets/footer/ui/footer.tsx";
-import {AccountBar} from "../../features/auth/ui/account-bar.tsx";
+import {Header} from "../../widgets/header";
+import {Footer} from "../../widgets/footer";
+import {AccountBar} from "../../features/auth";
 import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 

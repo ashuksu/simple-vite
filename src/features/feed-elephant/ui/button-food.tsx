@@ -10,7 +10,7 @@ export function ButtonFood({title, className, handleFeedJunkFood}: Props) {
     return (
         <button
             className={cn(
-                'button p-2.5 w-1/2 rounded-md',
+                'button button-md rounded-lg self-stretch',
                 className)}
             onClick={handleFeedJunkFood}>
             {title}

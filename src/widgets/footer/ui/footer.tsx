@@ -1,4 +1,4 @@
-import {Title} from "../../../shared/ui/title.tsx";
+import {Title} from "../../../shared/ui";
 
 export function Footer() {
     return (

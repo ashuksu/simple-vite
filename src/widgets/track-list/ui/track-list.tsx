@@ -1,6 +1,6 @@
-import {TrackItem} from "../../track/ui/track-item.tsx";
-import {useTracks} from "../../../entities/track/model/use-tracks.tsx";
-import {cx} from "tailwind-variants";
+import {TrackItem, useTracks} from "../../../entities/track";
+import {TrackListStatus} from "./track-list-status";
+import {ResetSelectionButton} from "./reset-selection-button";
 
 interface Props {
     selectedTrackId: string | null;
@@ -9,60 +9,42 @@ interface Props {
 
 export function TrackList({selectedTrackId, onTrackSelect}: Props) {
     const {tracks} = useTracks();
+    const className = "list flex flex-col items-center justify-center bg-gray-200 rounded-lg p-6 text-gray-700 text-lg"
 
     if (tracks === null) {
         return (
-            <div
-                className={`list flex flex-col items-center justify-center 
-                bg-gray-200 rounded-lg p-6 text-gray-700 text-lg`}>
-                Loading...
-            </div>
+            <TrackListStatus
+                className={className}
+                message="Loading..."
+            />
         );
     }
 
     if (tracks.length === 0) {
         return (
-            <div
-                className={`list flex flex-col items-center justify-center 
-                bg-gray-200 rounded-lg p-6 text-gray-700 text-lg`}>
-                No tracks :(
-            </div>
+            <TrackListStatus
+                className={className}
+                message="No tracks :("
+            />
         );
     }
 
-    const handleResetClick = () => {
-        onTrackSelect(null)
-    }
-
-    const handleClick = (id: string | null) => {
-        onTrackSelect?.(id)
-    }
-
-    const cssButton = [
-        'flex items-center justify-center mb-2.5 px-5 py-2.5 rounded-lg text-center text-lg text-gray-700 cursor-pointer',
-        selectedTrackId ? 'bg-blue-200 cursor-pointer' : 'bg-blue-100 cursor-auto'
-    ]
-
     return (
         <div
-            className={`list flex flex-col items-center justify-center 
-                bg-gray-200 rounded-lg p-6 text-gray-700 text-lg`}>
-            <button
-                className={cx(cssButton)}
-                onClick={handleResetClick}>
-                Reset selection
-            </button>
-            {tracks.map((track, index) => {
-                return (
-                    <TrackItem key={track.id}
-                               index={index}
-                               track={track}
-                               isSelected={track.id === selectedTrackId}
-                               onSelect={handleClick}
-                    />
-                )
-            })}
+            className={className}>
+            <ResetSelectionButton
+                isSelected={Boolean(selectedTrackId)}
+                onReset={() => onTrackSelect(null)}
+            />
+            {tracks.map((track, index) => (
+                <TrackItem
+                    key={track.id}
+                    index={index}
+                    track={track}
+                    isSelected={track.id === selectedTrackId}
+                    onSelect={(id) => onTrackSelect(id)}
+                />
+            ))}
         </div>
     )
 }
-
