@@ -1,81 +1,78 @@
-# React + TypeScript + Vite
+# Music Fun (FSD Pet-Project)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web application for playlist and track management, featuring interactive elements and built to master **Feature-Sliced
+Design (FSD)** methodology alongside a modern React ecosystem.
 
-Currently, two official plugins are available:
+## 🛠 Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react)
-  uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc)
-  uses [SWC](https://swc.rs/)
+* **Core:** React 18, TypeScript, Vite
+* **Package Manager:** `pnpm`
+* **Architecture:** Feature-Sliced Design (FSD)
+* **State & Data Fetching:** TanStack Query (React Query)
+* **Routing:** TanStack Router
+* **API Integration:** `openapi-fetch` (featuring custom automatic JWT refresh via middleware)
+* **Forms & Validation:** React Hook Form
+* **Styling:** Tailwind CSS, Tailwind Variants
+* **CI/CD & Hosting:** GitHub Actions, GitHub Pages, Vercel
 
-## React Compiler
+## 🏗 Architecture (FSD)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it,
-see [this documentation](https://react.dev/learn/react-compiler/installation).
+The project strictly follows Feature-Sliced Design layers:
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-    globalIgnores(['dist']),
-    {
-        files: ['**/*.{ts,tsx}'],
-        extends: [
-            // Other configs...
-
-            // Remove tseslint.configs.recommended and replace with this
-            tseslint.configs.recommendedTypeChecked,
-            // Alternatively, use this for stricter rules
-            tseslint.configs.strictTypeChecked,
-            // Optionally, add this for stylistic rules
-            tseslint.configs.stylisticTypeChecked,
-
-            // Other configs...
-        ],
-        languageOptions: {
-            parserOptions: {
-                project: ['./tsconfig.node.json', './tsconfig.app.json'],
-                tsconfigRootDir: import.meta.dirname,
-            },
-            // other options...
-        },
-    },
-])
+```text
+src/
+├── app/        # App initialization, global providers, routing configuration
+├── pages/      # Page-level composite components
+├── widgets/    # Self-contained UI blocks (Playlists, Header, TrackList)
+├── features/   # Interactive user actions (AddPlaylist, DeletePlaylist)
+├── entities/   # Domain entities (Playlist, Track, User)
+└── shared/     # Reusable code (UI kit, API client, helpers, configs)
 
 ```
 
-You can also
-install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x)
-and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom)
-for React-specific lint rules:
+Each module is isolated and exposes its public interface exclusively via a **Public API** (`index.ts`).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 🚢 CI/CD & Deployment
 
-export default defineConfig([
-    globalIgnores(['dist']),
-    {
-        files: ['**/*.{ts,tsx}'],
-        extends: [
-            // Other configs...
-            // Enable lint rules for React
-            reactX.configs['recommended-typescript'],
-            // Enable lint rules for React DOM
-            reactDom.configs.recommended,
-        ],
-        languageOptions: {
-            parserOptions: {
-                project: ['./tsconfig.node.json', './tsconfig.app.json'],
-                tsconfigRootDir: import.meta.dirname,
-            },
-            // other options...
-        },
-    },
-])
+* **Dev Environment:** Pushing to the `dev` branch triggers a GitHub Actions workflow that runs linting, builds the app,
+  and automatically deploys it to **GitHub Pages**.
+* **Production Environment:** Pushing to the `master` branch triggers an automated build and deployment to **Vercel**.
+
+## 🚀 Getting Started
+
+### 1. Clone & Install Dependencies
+
+```bash
+git clone <repository-url>
+cd <repository-folder>
+pnpm install
+
+```
+
+### 2. Environment Setup
+
+Create a `.env` file in the root directory and specify your configuration:
+
+```env
+VITE_API_URL=https://your-api-url.com/
+VITE_API_KEY=your_api_key
+
+```
+
+### 3. Run Development Server
+
+```bash
+pnpm dev
+
+```
+
+### 4. Lint & Production Build
+
+```bash
+# Run ESLint
+pnpm lint
+
+# Build for production
+pnpm build
 
 ```
