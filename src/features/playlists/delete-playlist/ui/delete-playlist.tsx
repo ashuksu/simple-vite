@@ -1,5 +1,5 @@
-import {useDeleteMutation} from "../model/use-delete-mutation.tsx";
-import {Close} from "../../../../shared/ui/close.tsx";
+import {useDeleteMutation} from "../model/use-delete-mutation.ts";
+import {Close} from "../../../../shared/ui";
 
 type Props = {
     playlistId: string
