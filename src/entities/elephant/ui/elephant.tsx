@@ -41,7 +41,7 @@ export function Elephant(props: Props) {
                         <p className='mb-3'>
                             Elephant's weight: <span className='font-bold'>{weight * 10}</span>
                         </p>
-                        <div className="flex items-center gap-3 max-w-60">
+                        <div className="grid grid-cols-2 gap-3 max-w-60">
                             <ButtonFood
                                 handleFeedJunkFood={handleFeedHealthyFood}
                                 title='Feed the elephant healthy food 🥬🍉🍌'/>

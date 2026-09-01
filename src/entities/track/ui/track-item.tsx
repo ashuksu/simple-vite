@@ -6,7 +6,7 @@ type Props = {
     index: number
     track: Track
     isSelected: boolean
-    onSelect: (id: string) => void
+    onSelect: (id: string | null) => void
 }
 
 const className = tv({
