@@ -1,5 +1,5 @@
 @utility list {
-    @apply relative flex flex-col w-full py-2.5 px-5 pl-10 gap-2.5 border-2 rounded-lg cursor-pointer transition-all;
+    @apply relative flex flex-col w-full py-2.5 px-5 pl-10 gap-2.5 border-2 rounded-lg transition-all;
 
     &:hover {
         @apply border-purple-500/50 bg-white/80 shadow-md scale-[1.01];
